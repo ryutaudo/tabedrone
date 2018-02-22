@@ -17,6 +17,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0",
+    "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.9",
     "es2015": "^0.0.0",
     "express": "^4.16.2",
@@ -32,6 +33,7 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "serve-favicon": "^2.4.5",
     "source-map": "^0.7.1",
     "style-loader": "^0.20.2",
     "webpack-dev-server": "^2.11.1"
@@ -52,5 +54,11 @@
     "react-addons-test-utils": "^15.6.2",
     "sinon": "^4.3.0",
     "webpack": "^3.11.0"
+  },
+  "scripts": {
+    "start": "node init/app.js",
+    "migrate": "knex migrate",
+    "seed": "knex seed",
+    "rollback": "knex rollback"
   }
 }
