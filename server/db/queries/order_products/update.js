@@ -1,22 +1,20 @@
 module.exports = knex => (params) => {
   // validation
-  if (!params || params.address === '') {
-    throw new Error('please add a address');
+  if (!params) {
+    throw new Error('please add the params object');
   }
-  if (!params || params.longitude === '') {
-    throw new Error('please add a longitude');
+  if (params.order_id === '') {
+    throw new Error('please add the order_id');
   }
-  if (!params || params.latitude === '') {
-    throw new Error('please add a latitude');
+  if (params.product_id === '') {
+    throw new Error('please add the product_id');
+  }
+  if (params.amount === '') {
+    throw new Error('please add the amount');
   }
 
   // update db-data
   return knex('order_products')
-    .update({ address: params.address })
-    .where({ longitude: params.longitude, latitude: params.latitude })
-    .then(() =>
-      knex('order_products')
-        .where({ latitude: params.latitude, longitude: params.longitude })
-        .select()
-        .then(rawDbData => new EntityGeocode(rawDbData)));
+    .update({ amount: params.amount })
+    .where({ order_id: params.order_id, product_id: params.product_id });
 };
