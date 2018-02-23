@@ -10,8 +10,8 @@ const createStoreWithMiddleware = compose(applyMiddleware(thunk))(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('app'),
+  document.getElementById('root'),
 );
