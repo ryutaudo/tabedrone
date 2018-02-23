@@ -7,24 +7,24 @@ const router = express.Router();
 router.get('/fridge-contents/:costumerId', (request, response) => {
   response.json([
     {
-      'id': 1, //customer based unique auto-increment. start: 1 
-      'name': 'apple',
-      'amount': 3,
+      id: 1, // customer based unique auto-increment. start: 1
+      name: 'apple',
+      amount: 3,
     },
     {
-      'id': 2, //customer based unique auto-increment. start: 1 
-      'name': 'orange',
-      'amount': 5,
+      id: 2, // customer based unique auto-increment. start: 1
+      name: 'orange',
+      amount: 5,
     },
     {
-      'id': 3, //customer based unique auto-increment. start: 1 
-      'name': 'milk',
-      'amount': 2,
+      id: 3, // customer based unique auto-increment. start: 1
+      name: 'milk',
+      amount: 2,
     },
     {
-      'id': 4, //customer based unique auto-increment. start: 1 
-      'name': 'wine',
-      'amount': 0,
+      id: 4, // customer based unique auto-increment. start: 1
+      name: 'wine',
+      amount: 0,
     },
   ]);
 });
@@ -54,7 +54,7 @@ router.get('/orders/:orderId', (request, response) => {
   response.json({
     orderId: 1,
     status: 'OPEN', // OPEN / CLOSE
-    cart: [{name: 'apple', amout: 4}],
+    cart: [{ name: 'apple', amount: 4 }],
   });
 });
 
