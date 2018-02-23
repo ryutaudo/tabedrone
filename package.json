@@ -5,6 +5,13 @@
   "repository": "https://github.com/ryutaudo/tabedrone.git",
   "author": "Christian Schmidt <cschmidt.solingen@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "hack": "webpack-dev-server --inline",
+    "start": "node ./server/bin/www",
+    "migrate": "knex migrate",
+    "rollback": "knex rollback",
+    "seed": "knex seed"
+  },
   "dependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
@@ -19,9 +26,13 @@
     "bootstrap": "^4.0.0",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.9",
+    "debug": "^3.1.0",
     "es2015": "^0.0.0",
     "express": "^4.16.2",
+    "extract-text-webpack-plugin": "^3.0.2",
     "knex": "^0.14.4",
+    "morgan": "^1.9.0",
+    "node-sass": "^4.7.2",
     "open-browser-webpack-plugin": "^0.0.5",
     "pg": "^7.4.1",
     "prop-types": "^15.6.0",
@@ -33,10 +44,11 @@
     "reactstrap": "^4.8.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "sass-loader": "^6.0.6",
     "serve-favicon": "^2.4.5",
     "source-map": "^0.7.1",
     "style-loader": "^0.20.2",
-    "morgan": "^1.9.0",
+    "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
   },
   "devDependencies": {
@@ -52,13 +64,6 @@
     "jest": "^22.4.0",
     "json-loader": "^0.5.7",
     "react-addons-test-utils": "^15.6.2",
-    "sinon": "^4.3.0",
-    "webpack": "^3.11.0"
-  },
-  "scripts": {
-    "start": "node ./bin/www",
-    "migrate": "knex migrate",
-    "rollback": "knex rollback",
-    "seed": "knex seed"
+    "sinon": "^4.3.0"
   }
 }
