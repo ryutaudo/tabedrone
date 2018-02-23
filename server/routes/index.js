@@ -53,7 +53,7 @@ router.get('/orders/:orderId', (request, response) => {
    */
   response.json({
     orderId: 1,
-    status: 'OPEN', // OPEN / CLOSE
+    status: 'OPEN', // OPEN / CLOSEfix
     cart: [{ name: 'apple', amount: 4 }],
   });
 });
