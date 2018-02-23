@@ -3,7 +3,7 @@ module.exports = knex => (params) => {
   if (!params) {
     throw new Error('please add object');
   }
-  if (params.name === '') {
+  if (params.name === '' || params.name === undefined) {
     throw new Error('please add the name');
   }
 
