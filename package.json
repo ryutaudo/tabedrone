@@ -5,6 +5,12 @@
   "repository": "https://github.com/ryutaudo/tabedrone.git",
   "author": "Christian Schmidt <cschmidt.solingen@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./server/bin/www",
+    "migrate": "knex migrate",
+    "rollback": "knex rollback",
+    "seed": "knex seed"
+  },
   "dependencies": {
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
@@ -55,11 +61,5 @@
     "react-addons-test-utils": "^15.6.2",
     "sinon": "^4.3.0",
     "webpack": "^3.11.0"
-  },
-  "scripts": {
-    "start": "node ./server/bin/www",
-    "migrate": "knex migrate",
-    "rollback": "knex rollback",
-    "seed": "knex seed"
   }
 }
