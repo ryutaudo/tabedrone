@@ -5,14 +5,14 @@ exports.up = knex => knex.schema.createTable(
       .index();
 
     table.integer('product_id').notNullable().unsigned();
-    
-    table.foreign('product_id').references('product.id');
+
+    // table.foreign('product_id').references('product.id');
 
     table.integer('amount').notNullable().unsigned();
 
     table.integer('order_id').notNullable().unsigned();
 
-    table.foreign('order_id').references('order.id');
+    // table.foreign('order_id').references('order.id');
   },
 );
 

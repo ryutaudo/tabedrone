@@ -4,7 +4,7 @@ exports.up = knex => knex.schema.createTable(
     table.increments()
       .index();
 
-    table.foreign('id').references('order.supermarket_id').unsigned();
+    // table.foreign('id').references('order.supermarket_id').unsigned();
 
     table.text('name')
       .notNullable();

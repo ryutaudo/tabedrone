@@ -3,8 +3,9 @@ exports.up = knex => knex.schema.createTable(
   (table) => {
     table.increments()
       .index();
-    table.foreign('id').references('fridge_inventory.customer_id');
-    table.foreign('id').references('order.customer_id');
+
+    // table.foreign('id').references('fridge_inventory.customer_id');
+    // table.foreign('id').references('order.customer_id');
 
     table.text('name')
       .notNullable();

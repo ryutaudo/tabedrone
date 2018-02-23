@@ -9,7 +9,7 @@
     "start": "node ./server/bin/www",
     "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
     "rollback": "knex rollback --knexfile ./server/db/knexfile.js",
-    "seed": "knex seed --knexfile ./server/db/knexfile.js"
+    "seed": "knex seed:run --knexfile ./server/db/knexfile.js"
   },
   "dependencies": {
     "babel": "^6.23.0",

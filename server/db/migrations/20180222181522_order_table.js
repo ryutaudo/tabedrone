@@ -4,7 +4,7 @@ exports.up = knex => knex.schema.createTable(
     table.increments()
       .index();
 
-    table.foreign('id').references('order_products.order_id');
+    // table.foreign('id').references('order_products.order_id');
     table.integer('customer_id').unsigned();
 
     table.text('status')
