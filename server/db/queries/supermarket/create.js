@@ -1,29 +1,18 @@
 module.exports = knex => (params) => {
-  // address exists?
-  if (!params || params.address === '') {
-    throw new Error('please add a address');
-  }
+    // validation
+    if (!params) {
+        throw new Error('please add the params object');
+    }
+    if ( params.id === '') {
+        throw new Error('please add the id');
+    }
+    if ( params.name === '') {
+        throw new Error('please add the name');
+    }
+    if (params.longitude === '' || params.latitude === '') {
+        throw new Error('please add the geocode');
+    }
 
-  return Geocoder.geocode(params.address)
-    .then(response => response.json())
-    .then((json) => {
-      // error-handling
-      if (json.results.length === 0) {
-        throw Error(`no geocode found for the address ${params.address}`);
-      }
-      if (json.results.length > 1) {
-        throw Error(`address is not unique enough. found more geocodes for ${params.address}`);
-      }
-      if (json.status !== 'OK') {
-        throw Error(json.status);
-      }
-      const singleGeocode = json.results[0];
 
-      const data = {
-        latitude: singleGeocode.geometry.location.lat,
-        longitude: singleGeocode.geometry.location.lng,
-        address: params.address,
-      };
-      return knex('supermarket').insert(data).then(() => new EntityGeocode(data));
-    });
+    return knex('supermarket').insert(params);
 }

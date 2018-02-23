@@ -1,3 +1,3 @@
 module.exports = knex => () =>
-  knex('supermarket')
+  knex('customer')
     .select();

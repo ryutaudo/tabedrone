@@ -1,22 +1,14 @@
 module.exports = knex => (params) => {
-  // validation
-  if (!params || params.address === '') {
-    throw new Error('please add a address');
+  // error validation
+  if (!params) {
+    throw new Error('please add object');
   }
-  if (!params || params.longitude === '') {
-    throw new Error('please add a longitude');
-  }
-  if (!params || params.latitude === '') {
-    throw new Error('please add a latitude');
+  if (params.name === '') {
+    throw new Error('please add the name');
   }
 
   // update db-data
   return knex('product')
-    .update({ address: params.address })
-    .where({ longitude: params.longitude, latitude: params.latitude })
-    .then(() =>
-      knex('product')
-        .where({ latitude: params.latitude, longitude: params.longitude })
-        .select()
-        .then(rawDbData => rawDbData));
+    .update({ name: params.name })
+    .where({ id: params.id });
 };

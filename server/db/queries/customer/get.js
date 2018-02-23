@@ -3,7 +3,7 @@ module.exports = async knex =>
    * @param object params
    */
   params =>
-    knex('supermarket')
+    knex('customer')
       .where({ id: params.id })
       .select()
       .then((dbRawData) => {
@@ -11,5 +11,5 @@ module.exports = async knex =>
           return dbRawData[0];
         }
 
-        throw new Error(`Error finding supermarket with the id:${params.id}`);
+        throw new Error(`Error finding customer with the id:${params.id}`);
       });

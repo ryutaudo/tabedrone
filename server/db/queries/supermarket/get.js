@@ -4,12 +4,12 @@ module.exports = async knex =>
    */
   params =>
     knex('supermarket')
-      .where({ latitude: params.latitude, longitude: params.longitude })
+      .where({ id: params.id })
       .select()
       .then((dbRawData) => {
         if (dbRawData.length === 1) {
-          return new EntityGeocode(dbRawData[0]);
+          return dbRawData[0];
         }
 
-        throw new Error(`Error finding geocode long:${params.longitude}, lat:${params.latitude}`);
+        throw new Error(`Error finding supermarket with the id:${params.id}`);
       });
