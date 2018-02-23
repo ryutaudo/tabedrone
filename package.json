@@ -2,14 +2,14 @@
   "name": "tabedrone",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/ryutaudo/tabedrone.git",
-  "author": "Christian Schmidt <cschmidt.solingen@gmail.com>",
-  "license": "MIT",
+  "repository": "hhttps://github.com/tabedrone/tabedrone",
+  "author": "Mr. Appointment <cschmidt.solingen@gmail.com>",
+  "license": "Yavascript",
   "scripts": {
     "start": "node ./server/bin/www",
-    "migrate": "knex migrate",
-    "rollback": "knex rollback",
-    "seed": "knex seed"
+    "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
+    "rollback": "knex rollback --knexfile ./server/db/knexfile.js",
+    "seed": "knex seed --knexfile ./server/db/knexfile.js"
   },
   "dependencies": {
     "babel": "^6.23.0",
