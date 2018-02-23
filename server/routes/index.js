@@ -54,7 +54,7 @@ router.get('/orders/:orderId', (request, response) => {
   response.json({
     orderId: 1,
     status: 'OPEN', // OPEN / CLOSE
-    cart: [{name: 'apple', amout: 4}],
+    cart: [{name: 'apple', amount: 4}],
   });
 });
 
