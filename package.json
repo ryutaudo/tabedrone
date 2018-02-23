@@ -10,7 +10,8 @@
     "start": "node ./server/bin/www",
     "migrate": "knex migrate",
     "rollback": "knex rollback",
-    "seed": "knex seed"
+    "seed": "knex seed",
+    "test": "jest"
   },
   "dependencies": {
     "babel": "^6.23.0",
@@ -58,9 +59,10 @@
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.12.2",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "jest": "^22.4.0",
+    "jest": "^21.2.1",
     "json-loader": "^0.5.7",
     "react-addons-test-utils": "^15.6.2",
     "sinon": "^4.3.0"
