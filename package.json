@@ -6,6 +6,8 @@
   "author": "Christian Schmidt <cschmidt.solingen@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build": "webpack",
+    "hack": "webpack-dev-server --hot --inline webpack.config.js",
     "start": "node ./server/bin/www",
     "migrate": "knex migrate",
     "rollback": "knex rollback",
