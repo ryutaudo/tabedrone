@@ -58,14 +58,12 @@ router.post('/orders', async (request, response) => {
   try {
     const orders = await db.order
     .create(
-      
         {
           // orderId: request.params.orderId,
           customer_id: request.body.customerId,
           status: request.body.status,
           supermarket_id: request.body.supermarketId
         }
-      
     )
     .into('order');
     response.send(orders);
@@ -84,17 +82,30 @@ router.post('/orders', async (request, response) => {
   */
 
 /* GET order */
-router.get('/orders/:orderId', (request, response) => {
+router.get('/orders/:orderId', async (request, response) => {
   /**
    * is inside the request.
    * name: cart
    * value: [{name: 'apple', amout: 4}, {...}]
    */
+  try {
+    console.log("db is: ", db.order, request.params, request.params.orderId, request.params.order_id );
+   // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
+    const orderInfo = await db.order.get({ order_id: +request.params.orderId});
+    response.send(orderInfo);
+  }
+  catch(err) {
+    console.error('Error from server/routes/index.js orderInfo get endpoint!', err);
+    response.status('Internal server error').send(500);
+  }
+
+  /*
   response.json({
     orderId: 1,
     status: 'OPEN', // OPEN / CLOSE
     cart: [{ name: 'apple', amount: 4 }],
   });
+  */
 });
 
 module.exports = router;

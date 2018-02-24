@@ -1,6 +1,6 @@
 module.exports = knex => (params) => {
   // error validation
-  console.log("order create params: ", params);
+  // console.log("order create params: ", params);
   if (!params) {
     throw new Error('please add object');
   }

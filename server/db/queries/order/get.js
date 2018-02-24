@@ -1,16 +1,17 @@
-module.exports = async knex =>
+module.exports = knex =>
   /**
    * @param object params
    */
   (params) => {
+    console.log("get order ", params);
     // error validation
     if (!params) {
       throw new Error('please add object');
     }
-    if (params.id === '' || params.id === undefined) {
+    if (params.order_id === '' || params.order_id === undefined) {
       throw new Error('please add the id');
     }
-    if (!Number.isInteger(params.id)) {
+    if (!Number.isInteger(params.order_id)) {
       throw new Error('id should be a number');
     }
     if (params.id <= 0) {
@@ -18,7 +19,7 @@ module.exports = async knex =>
     }
 
     return knex('order')
-      .where({ id: params.id })
+      .where({ id: params.order_id })
       .select()
       .then((dbRawData) => {
         // return one order-object
