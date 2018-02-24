@@ -54,16 +54,18 @@ router.post('/orders', async (request, response) => {
    * cart: [{name: 'apple', amout: 4}, {...}]
    */
   //
+  //console.log("post orders is:", db.order.create);
   try {
-    const orders = await db
-    .insert(
-      [
+    const orders = await db.order
+    .create(
+      
         {
-          orderId: 1,
-          customerId: 1,
-          status: 'OPEN',
+          // orderId: request.params.orderId,
+          customer_id: request.body.customerId,
+          status: request.body.status,
+          supermarket_id: request.body.supermarketId
         }
-      ]
+      
     )
     .into('order');
     response.send(orders);
