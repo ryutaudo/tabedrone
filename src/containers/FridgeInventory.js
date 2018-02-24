@@ -1,4 +1,14 @@
 import { connect } from 'react-redux';
 import FridgeInventory from '../components/FridgeInventory';
 
-export default connect()(FridgeInventory);
+import { getFridgeContents } from '../actions/index';
+
+const mapStateToProps = state => ({
+  fridgeContents: state.fridgeContents,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getFridgeContents: () => dispatch(getFridgeContents()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FridgeInventory);
