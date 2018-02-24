@@ -1,7 +1,7 @@
 import { getCurrentFridgeContents } from '../utils/index';
 
 const getFridgeContentsSuccess = fridgeContents => ({
-  type: 'GET_FRIDGE_INVENTORY',
+  type: 'GET_FRIDGE_CONTENTS',
   fridgeContents,
 });
 
