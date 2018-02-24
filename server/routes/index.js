@@ -8,16 +8,19 @@ const db = require('../db/index');
   // connect queries to the 3 endpoints below (database to front end)
   // test if front end gets data using postman on http://localhost:3000/api/...
  
-/* GET get fridge-content */
-router.get('/fridge-contents/:costumerId', async (request, response) => {
+/* GET fridge-content */
+router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
-    const fridgeContents = await db.select('customer_id').table('fridge_inventory');
+    console.log("db is: ", db.fridge_inventory, request.params );
+   // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
+    const fridgeContents = await db.fridge_inventory.get({ customer_id: +request.params.customerId});
     response.send(fridgeContents);
   }
   catch(err) {
-    console.error('Error loading locations!', err);
-    response.send(500, 'Internal server error');
+    console.error('Error from server/routes/index.js fridge contents endpoint!', err);
+    response.status('Internal server error').send(500);
   }
+});
   /*
   response.json([
     {
@@ -42,23 +45,43 @@ router.get('/fridge-contents/:costumerId', async (request, response) => {
     },
   ]);
   */
-});
 
-/* POST post order */
-router.post('/orders', (request, response) => {
+/* POST order */
+router.post('/orders', async (request, response) => {
   /**
    * is inside the request.
    * customerId: 1
    * cart: [{name: 'apple', amout: 4}, {...}]
    */
+  //
+  try {
+    const orders = await db
+    .insert(
+      [
+        {
+          orderId: 1,
+          customerId: 1,
+          status: 'OPEN',
+        }
+      ]
+    )
+    .into('order');
+    response.send(orders);
+  }
+  catch(err) {
+    console.error('Error from server/routes/index.js order post endpoint!', err);
+    response.send(500, 'Internal server error');
+  }
+});
+  /*
   response.json({
     orderId: 1,
     customerId: 1,
     status: 'OPEN',
   });
-});
+  */
 
-/* GET get order */
+/* GET order */
 router.get('/orders/:orderId', (request, response) => {
   /**
    * is inside the request.
