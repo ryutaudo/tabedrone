@@ -12,12 +12,22 @@ export default class App extends Component {
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
   }
 
-  addFridgeEntry(event, name = '') {
+  addFridgeEntry(event, name = '', amount = 1) {
     event.preventDefault();
+    if (name !== '') {
+      this.props.addEntryToFridge(name, amount);
+    } else {
+      console.log('add', name);
+    }
   }
 
-  removeFridgeEntry(event, name = '') {
+  removeFridgeEntry(event, name = '', amount = 1) {
     event.preventDefault();
+    if (name !== '') {
+      this.props.removeEntryFromFridge(name, amount);
+    } else {
+      console.log('remove', name);
+    }
   }
 
   render() {

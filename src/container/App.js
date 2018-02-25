@@ -1,24 +1,22 @@
 import { connect } from 'react-redux';
-// import { toggleTodo } from '../actions';
+import { addEntryToFridge, removeEntryFromFridge } from '../action/index';
 import App from '../components/App';
 
-const mapStateToProps = state => {
-  return {
-    fridgeContent: state.fridgeContent,
-  }
-}
+const mapStateToProps = state => ({
+  fridgeContent: state.fridgeContent,
+});
 
-/* const mapDispatchToProps = dispatch => {
-  return {
-    onTodoClick: id => {
-      dispatch(toggleTodo(id))
-    }
-  }
-} */
+const mapDispatchToProps = dispatch => ({
+  addEntryToFridge: (name, amount) =>
+    dispatch(addEntryToFridge(name, amount)),
+  removeEntryFromFridge: (name, amount) =>
+    dispatch(removeEntryFromFridge(name, amount)),
+});
+
 
 const VisibleApp = connect(
   mapStateToProps,
-  null, // mapDispatchToProps,
+  mapDispatchToProps,
 )(App);
 
 export default VisibleApp;
