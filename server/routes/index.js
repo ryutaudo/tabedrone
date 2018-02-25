@@ -11,16 +11,18 @@ const db = require('../db/index');
 /* GET fridge-content */
 router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
-    console.log("db is: ", db.fridge_inventory, request.params);
+    console.log('db is: ', db.fridge_inventory, request.params);
     // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
-    const fridgeContents = await db.fridge_inventory.get({ customer_id: +request.params.customerId});
+    const fridgeContents = await db.fridge_inventory.get({
+      customer_id: +request.params.customerId,
+    });
     response.send(fridgeContents);
   } catch (error) {
     console.error('Error from server/routes/index.js fridge contents endpoint!', error);
     response.status('Internal server error').send(500);
   }
 });
-  /**
+/**
   response.json([
     {
       id: 1, // customer based unique auto-increment. start: 1
@@ -62,17 +64,14 @@ router.post('/order', async (request, response) => {
    * cart: [{name: 'apple', amount: 4}, {...}]
    */
   //
-  //console.log("post orders is:", db.order.create);
+  // console.log("post orders is:", db.order.create);
   try {
     const orders = await db.order
-      .create(
-        {
-          // orderId: request.params.orderId,
-          customer_id: request.body.customerId,
-          status: request.body.status,
-          supermarket_id: request.body.supermarketId,
-        },
-      ).into('order');
+      .create({
+        customer_id: request.body.customerId,
+        status: 'OPEN',
+        supermarket_id: request.body.supermarketId,
+      }).into('order');
     response.send(orders);
   } catch (error) {
     console.error('Error from server/routes/index.js order post endpoint!', error);
@@ -95,9 +94,9 @@ router.get('/orders/:orderId', async (request, response) => {
    * value: [{name: 'apple', amout: 4}, {...}]
    */
   try {
-    console.log("db is: ", db.order, request.params, request.params.orderId, request.params.order_id );
+    console.log('db is: ', db.order, request.params, request.params.orderId, request.params.order_id);
     // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
-    const orderInfo = await db.order.get({ order_id: +request.params.orderId});
+    const orderInfo = await db.order.get({ order_id: +request.params.orderId });
     response.send(orderInfo);
   } catch (error) {
     console.error('Error from server/routes/index.js orderInfo get endpoint!', error);
