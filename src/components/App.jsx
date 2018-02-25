@@ -4,13 +4,13 @@ import OrderButton from '../container/OrderButton';
 import FridgeEntry from '../container/FridgeEntry';
 
 
-const App = () => (
+const App = ({ fridgeContent }) => (
   <div>
     <Headline />
 
     <div className="fridge"> 
-    {
-      this.fridgeContent.map(entry => (<div>
+    { 
+      fridgeContent.map(entry => (<div>
         {entry.name}
       </div>))
     }
