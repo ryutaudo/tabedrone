@@ -46,11 +46,20 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
   */
 
 /* POST order */
-router.post('/orders', async (request, response) => {
+router.post('/use-product', async (request, response) => {
+  /**
+   * @todo get customerId + cart = {[name: 'x', amount: - 1]}
+   * fridge content should be reduced by this amount
+   */
+  response.send(500, 'please implement');
+});
+
+/* POST order */
+router.post('/order', async (request, response) => {
   /**
    * is inside the request.
    * customerId: 1
-   * cart: [{name: 'apple', amout: 4}, {...}]
+   * cart: [{name: 'apple', amount: 4}, {...}]
    */
   //
   //console.log("post orders is:", db.order.create);

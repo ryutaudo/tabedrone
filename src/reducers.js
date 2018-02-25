@@ -1,4 +1,5 @@
 const DefaultState = {
+  customerId: 1,
   fridgeContent: {
     milch: 3,
     hamburger: 1,

@@ -3,7 +3,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 import OrderButton from '../container/OrderButton';
-import FridgeEntry from '../container/FridgeEntry';
 
 export default class App extends Component {
   constructor(props) {
@@ -12,22 +11,61 @@ export default class App extends Component {
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
   }
 
-  addFridgeEntry(event, name = '', amount = 1) {
+  async addFridgeEntry(event, name = '', amount = 1) {
     event.preventDefault();
     if (name !== '') {
       this.props.addEntryToFridge(name, amount);
+
+      await fetch(
+        '/api/order',
+        {
+          method: 'POST',
+          headers: new Headers({
+            'content-type': 'application/json',
+          }),
+          body: JSON.stringify({ customerId: this.props.customerId, cart: [{ name, amount }] }),
+        },
+      );
     } else {
-      console.log('add', name);
+      confirmAlert({
+        title: 'Buy new product',
+        message: `did you want to delete ${fileName}`,
+        confirmLabel: 'Buy',
+        cancelLabel: 'Cancel',
+        onConfirm: async function () {
+          // send to server
+          await fetch(
+            '/api/',
+            {
+              headers: new Headers({
+                'content-type': 'application/json',
+              }),
+              method: 'DELETE',
+              body: JSON.stringify({ fileName })
+            },
+          ).then(response => response.json());
+
+          this.props.deleteFile(fileName);
+        }.bind(this),
+      });
     }
   }
 
-  removeFridgeEntry(event, name = '', amount = 1) {
+  async removeFridgeEntry(event, name = '', amount = 1) {
     event.preventDefault();
-    if (name !== '') {
-      this.props.removeEntryFromFridge(name, amount);
-    } else {
-      console.log('remove', name);
-    }
+
+    this.props.removeEntryFromFridge(name, amount);
+
+    await fetch(
+      '/api/use-product',
+      {
+        method: 'DELETE',
+        headers: new Headers({
+          'content-type': 'application/json',
+        }),
+        body: JSON.stringify({ customerId: this.props.customerId, cart: [{ name, amount }] }),
+      },
+    );
   }
 
   render() {
