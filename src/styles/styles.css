@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .headlinestyle {
   padding: 2rem;
   display: flex;
@@ -8,4 +12,34 @@
 .headlineheader {
   cursor: pointer;
   margin-right: auto;
+}
+
+
+
+
+.fridge {
+  padding: 10px;
+}
+
+.inventoryEntry {
+  padding: 10px;
+  border: 1px solid #999;
+  background-color: #ccc;
+  float: left;
+  width: 30%;
+  margin-right: 10px;
+}
+
+.productName {
+  margin: 0;
+}
+
+.iconList div {
+  border: 1px solid #aaa;
+  float: left;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 10px;
 }
