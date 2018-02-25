@@ -20,8 +20,8 @@ const reducers = (state = DefaultState, action) => {
     case 'REMOVE_FRIDGE_CONTENT': {
       const newState = getCopyFromState();
       newState.fridgeContent[action.contentName] -= action.amount;
-      if (newState.fridgeContent[action.contentName] < 0) {
-        newState.fridgeContent[action.contentName] = 0;
+      if (newState.fridgeContent[action.contentName] <= 0) {
+        delete newState.fridgeContent[action.contentName];
       }
       return newState;
     }
