@@ -6,6 +6,7 @@
   "author": "Mr. Appointment <cschmidt.solingen@gmail.com>",
   "license": "Yavascript",
   "scripts": {
+    "build": "webpack",
     "hack": "webpack-dev-server --inline",
     "start": "node ./server/bin/www",
     "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
