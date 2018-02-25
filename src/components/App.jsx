@@ -3,6 +3,9 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 
+/**
+ * @todo load init inventore from the database and remove dummy data from the reducer
+ */
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -28,23 +31,21 @@ export default class App extends Component {
     } else {
       confirmAlert({
         title: 'Buy new product',
-        message: `did you want to delete ${fileName}`,
+        message: 'blabla', // @todo add product-list
         confirmLabel: 'Buy',
         cancelLabel: 'Cancel',
         onConfirm: async function () {
           // send to server
           await fetch(
-            '/api/',
+            '/api/order',
             {
               headers: new Headers({
                 'content-type': 'application/json',
               }),
-              method: 'DELETE',
-              body: JSON.stringify({ fileName })
+              method: 'POST',
+              body: JSON.stringify({ name: 'not implemented', amount }),
             },
           ).then(response => response.json());
-
-          this.props.deleteFile(fileName);
         }.bind(this),
       });
     }
