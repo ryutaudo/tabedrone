@@ -10,8 +10,9 @@ const App = ({ fridgeContent }) => (
 
     <div className="fridge"> 
     { 
-      fridgeContent.map(entry => (<div>
-        {entry.name}
+      Object.keys(fridgeContent).map(name => (<div>
+        name: {name}<br />
+        ammount: {fridgeContent[name]}<br />
       </div>))
     }
     </div>

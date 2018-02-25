@@ -10,4 +10,7 @@ const removeEntryFromFridge = (contentName, amount) => ({
   amount,
 });
 
-module.exports = { addEntryToFridge, removeEntryFromFridge };
+module.exports = {
+  addEntryToFridge,
+  removeEntryFromFridge,
+};
