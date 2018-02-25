@@ -1,9 +1,23 @@
 import React from 'react';
+import Headline from '../container/Headline';
+import OrderButton from '../container/OrderButton';
+import FridgeEntry from '../container/FridgeEntry';
 
-const Todo = () => (
+
+const App = () => (
   <div>
-  hello world
+    <Headline />
+
+    <div className="fridge"> 
+    {
+      this.fridgeContent.map(entry => (<div>
+        {entry.name}
+      </div>))
+    }
+    </div>
+    hello world
+    <OrderButton />
   </div>
 );
 
-export default Todo;
+export default App;

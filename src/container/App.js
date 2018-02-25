@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 // import { toggleTodo } from '../actions';
 import App from '../components/App';
 
-/* const mapStateToProps = state => {
+const mapStateToProps = state => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    fridgeContent: state.fridgeContent,
   }
 }
 
-const mapDispatchToProps = dispatch => {
+/* const mapDispatchToProps = dispatch => {
   return {
     onTodoClick: id => {
       dispatch(toggleTodo(id))
@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => {
 } */
 
 const VisibleApp = connect(
-  null, // mapStateToProps,
+  mapStateToProps,
   null, // mapDispatchToProps,
 )(App);
 

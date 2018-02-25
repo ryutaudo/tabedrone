@@ -1,5 +1,5 @@
 const DefaultState = {
-
+  fridgeContent: [],
 };
 
 const reducers = (state = DefaultState, action) => {
