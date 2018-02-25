@@ -1,5 +1,0 @@
-class airPlane {
-  constructor() {
-    // @todo
-  }
-}
