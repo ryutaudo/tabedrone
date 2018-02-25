@@ -13,6 +13,7 @@
     "seed": "knex seed:run --knexfile ./server/db/knexfile.js"
   },
   "dependencies": {
+    "airmap-map-sdk": "^2.4.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

@@ -1,11 +1,10 @@
 const request = require('superagent');
 
-class airMap {
+class AirMap {
   /**
-   * 
    * @param string apiKey
    */
-  constructor(apiKey, authorization) {
+  constructor(apiKey, authorization, userId) {
     this.apiKey = apiKey;
     this.baseUrl = 'https://api.airmap.jp';
     this.rulesets = [
@@ -13,18 +12,19 @@ class airMap {
     ];
     this.maxAltitudeAgl = 60.96;
     this.authorization = authorization;
+    this.userId = userId;
   }
 
   /**
    * return structure see https://developers.airmap.com/docs/flight-planning
    * @return Promise
-   * @param object startGeocode 
-   * @param string pilotId 
-   * @param string startTime 
-   * @param string endTime 
+   * @param object startGeocode
+   * @param string pilotId
+   * @param string startTime
+   * @param string endTime
    * @param array coordinates
    */
-  flightPlaning(
+  getFlightPlaning(
     startGeocode,
     pilotId = 'auth0|591dea1006732e54be4b875f',
     startTime = 'now',
@@ -34,25 +34,14 @@ class airMap {
     const data = {
       rulesets: this.rulesets,
       start_time: startTime,
-      end_time: endTime, // "2018-01-01T12:00:00-08:00",
+      end_time: endTime,
       max_altitude_agl: this.maxAltitudeAgl,
       takeoff_latitude: startGeocode.latitude,
       takeoff_longitude: startGeocode.longitude,
       buffer: 1,
       geometry: {
         type: 'Polygon',
-        coordinates: coordinates, /*[
-          [
-            [-118.37099075317383, 33.85505651142062],
-            [-118.37305068969727, 33.85502978214579],
-            [-118.37347984313963, 33.854673391015496],
-            [-118.37306141853333, 33.85231226221667],
-            [-118.37193489074707, 33.85174201755203],
-            [-118.36997151374815, 33.85176874785573],
-            [-118.36995005607605, 33.8528112231754],
-            [-118.37099075317383, 33.85505651142062],
-          ],*/
-        ],
+        coordinates,
       },
       pilot_id: pilotId,
     };
@@ -65,11 +54,12 @@ class airMap {
 
   /**
    * return structure see https://developers.airmap.com/docs/flight-briefing
+   * @param string flightId
    * @return Promise
    */
-  getFlightBriefing() {
+  getFlightBriefing(flightId) {
     return this.getResponse(
-      `${this.baseUrl}/flight/v2/plan/flight_plan%7CDv5oxg8FXL7PQCylRO0piJn0LMq/briefing`,
+      `${this.baseUrl}/flight/v2/plan/flight_plan%7C${encodeURIComponent(flightId)}/briefing`,
       {},
       this.authorization,
     );
@@ -77,16 +67,26 @@ class airMap {
 
   /**
    * return structure see https://developers.airmap.com/docs/anonymous-user-1
-   * @param string userId
    * @return Promise
    */
-  getUser(userId) {
+  getUser() {
     const data = {
-      user_id: userId,
+      user_id: this.userId,
     };
     return this.getResponse(
       `${this.baseUrl}/auth/v1/anonymous/token`,
       data,
+    );
+  }
+
+  /**
+   * return structure see https://developers.airmap.com/docs/anonymous-user-1
+   * @return Promise
+   */
+  getPilotAircraft(pilotId) {
+    return this.getResponse(
+      `${this.baseUrl}/pilot/v2/${pilotId}/aircraft`,
+      {},
     );
   }
 
@@ -110,5 +110,34 @@ class airMap {
         }));
   }
 }
+const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkZW50aWFsX2lkIjoiY3JlZGVudGlhbHxhS0JsOXlvVEsycGFKNVNST0p2WkJTejlCbUFvIiwiYXBwbGljYXRpb25faWQiOiJhcHBsaWNhdGlvbnxrNXg4ZW92dG9YTTRkTEhNUHd3QnBVOEFlNmFRIiwib3JnYW5pemF0aW9uX2lkIjoiZGV2ZWxvcGVyfHl6TGxQNE1GbzlscFpFSDhSNVc2SlVFeEtHcHgiLCJpYXQiOjE1MTk1MjI5ODV9.22nFyHA2aSckOkWfMeSX9fOOIRcBksUUxzrTB77enGY';
+const authorization = 'JsERHKUW4nbpoB4WwZZRc50JGkra5qWM';
+const userId = '1';
+const airMap = new AirMap(apiKey, authorization, userId);
 
-module.exports = airMap;
+airMap.getPilotAircraft(1).then(data => console.log(111, data)).catch(data => console.log(222, data));
+
+
+
+/*
+const flightId = 'dummy';
+//airMap.getUser().then(data => console.log(111, data)).catch(data => console.log(222, data));
+*/
+// not working
+//airMap.getFlightBriefing(flightId).then(data => console.log(111, data)).catch(data => console.log(222, data));
+
+
+const startGeocode = { latitude: 35.6859307, longitude: 139.7430913 };
+const pilotId = 'auth0|591dea1006732e54be4b875f';
+const startTime = 'now';
+const endTime = '2019-01-01T12:00:00-08:00';
+const coordinates = [[35.6853525, 139.7425988]];
+airMap.getFlightPlaning(
+  startGeocode,
+  pilotId,
+  startTime,
+  endTime,
+  coordinates,
+).then(data => console.log(111, data)).catch(data => console.log(222, data));
+
+module.exports = AirMap;
