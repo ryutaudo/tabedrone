@@ -1,5 +1,8 @@
 const DefaultState = {
-  fridgeContent: [],
+  fridgeContent: {
+    milch: 3,
+    hamburger: 1,
+  },
 };
 
 const reducers = (state = DefaultState, action) => {
