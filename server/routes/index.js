@@ -11,15 +11,12 @@ const db = require('../db/index');
 /* GET fridge-content */
 router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
-    console.log('db is: ', db.fridge_inventory, request.params);
-    // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
     const fridgeContents = await db.fridge_inventory.get({
       customer_id: +request.params.customerId,
     });
-    response.send(fridgeContents);
+    response.json(fridgeContents);
   } catch (error) {
-    console.error('Error from server/routes/index.js fridge contents endpoint!', error);
-    response.status('Internal server error').send(500);
+    response.status(error).send(500);
   }
 });
 /**
@@ -63,19 +60,19 @@ router.post('/order', async (request, response) => {
    * customerId: 1
    * cart: [{name: 'apple', amount: 4}, {...}]
    */
-  //
-  // console.log("post orders is:", db.order.create);
   try {
+    // @todo
+    const supermarketId = 1;
+
     const orders = await db.order
       .create({
         customer_id: request.body.customerId,
         status: 'OPEN',
-        supermarket_id: request.body.supermarketId,
+        supermarket_id: supermarketId,
       }).into('order');
     response.send(orders);
   } catch (error) {
-    console.error('Error from server/routes/index.js order post endpoint!', error);
-    response.send(500, 'Internal server error');
+    response.send(500, error);
   }
 });
 /*
@@ -88,11 +85,6 @@ router.post('/order', async (request, response) => {
 
 /* GET order */
 router.get('/orders/:orderId', async (request, response) => {
-  /**
-   * is inside the request.
-   * name: cart
-   * value: [{name: 'apple', amout: 4}, {...}]
-   */
   try {
     const orderId = +request.params.orderId;
     const orderInfo = await db.order.get({ order_id: orderId });
@@ -106,14 +98,6 @@ router.get('/orders/:orderId', async (request, response) => {
   } catch (error) {
     response.status(error).send(500);
   }
-
-  /*
-  response.json({
-    orderId: 1,
-    status: 'OPEN', // OPEN / CLOSE
-    cart: [{ name: 'apple', amount: 4 }],
-  });
-  */
 });
 
 module.exports = router;
