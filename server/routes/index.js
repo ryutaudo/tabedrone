@@ -50,10 +50,20 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
 /* POST order */
 router.post('/use-product', async (request, response) => {
   /**
-   * @todo get customerId + cart = {[name: 'x', amount: - 1]}
+   * get customerId + cart = {[name: 'x', amount: - 1]}
    * fridge content should be reduced by this amount
    */
-  response.send(500, 'please implement');
+  try {
+    console.log("use-product endpt", request.body.customerId);
+    db.fridge_inventory.getAllProducts(request.body.customerId, request.body.cart);
+
+    response.json({
+      customerId: request.body.customerId,
+      status: 'successful',
+    });
+  } catch (error) {
+    response.status(error).send(500);
+  }
 });
 
 /* POST order */
@@ -62,10 +72,59 @@ router.post('/order', async (request, response) => {
    * is inside the request.
    * customerId: 1
    * cart: [{name: 'apple', amount: 4}, {...}]
+   * 
+   * 1. decrease amount from fridge query
+   * 2. return status
    */
+
+   
   //
+
+  // 1. loading customer id from geocode
+  // 2. loading all supermarkets from db
+  // 3. finding nearest supermarket id closest to customer  
+  // 4. saving the cart products
+  // 5. increase of amount in fridge_inventory
+  // 6. new created orderid  
+
   // console.log("post orders is:", db.order.create);
+  // from Christian's github https://github.com/ChristianSchmidt1981/meetup-02-21-2018/blob/master/distance-with-curvature.js
+  function getDistance(geocodeA, geocodeB) {
+    // point 1
+    const between2parallels = 111.3; // unit: km
+    const between2meridians = 71.5; // unit: km
+
+    const rad = 0.01745; // 1° = π/180 rad ≈ 0.01745
+    const lat = (geocodeA.latitude - geocodeB.latitude) / 2 * rad;
+
+    // point 2
+    const dx = between2meridians * Math.cos(lat) * (geocodeA.longitude - geocodeB.longitude);
+    const dy = between2parallels * (geocodeA.latitude - geocodeB.latitude);
+
+    // point 3
+    return Math.sqrt((dx * dx) + (dy * dy));
+  }
   try {
+    // point 1
+    const geocodeFromCustomer = await db.customer.get({
+      latitude: +request.params.latitude,
+      long: +request.params.longitude,
+    });
+    const geocodeFromSupermarket = await db.customer.get({
+      latitude: +request.params.latitude,
+      long: +request.params.longitude,
+    });
+
+    // point 2
+    const distanceInCentimeter = getDistance(
+      geocodeFromCustomer,
+      geocodeFromSupermarket,
+    );
+
+    // point 3
+    console.log(distanceInCentimeter);
+
+
     const orders = await db.order
       .create({
         customer_id: request.body.customerId,
