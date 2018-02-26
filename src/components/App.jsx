@@ -24,6 +24,21 @@ export default class App extends Component {
     ];
   }
 
+  async componentDidMount() {
+    const products = await fetch(
+      `/api/fridge-contents/${this.props.customerId}`,
+      {
+        method: 'POST',
+        headers: new Headers({
+          'content-type': 'application/json',
+        }),
+      },
+    );
+    const productList = products.map(product => ({ name: product.name, amount: product.amount }));
+
+    this.props.initProductList(productList);
+  }
+
   async addFridgeEntry(event, name = '', amount = 1) {
     event.preventDefault();
 
@@ -88,8 +103,8 @@ export default class App extends Component {
             <select id="new-product">
               {
                 this.products.filter(product => !Object.keys(this.props.fridgeContent).includes(product))
-                .map(product => (
-                    <option value={product}>{product}</option>
+                .map((product, idx) => (
+                    <option key={idx} value={product}>{product}</option>
                 ))
               }
             </select>
