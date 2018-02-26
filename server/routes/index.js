@@ -3,18 +3,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/index');
 
-// tasks to do, Sat Feb 24, 2018
-// comment out response.json mock data
-// connect queries to the 3 endpoints below (database to front end)
-// test if front end gets data using postman on http://localhost:3000/api/...
-
 /* GET fridge-content */
 router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
-    const fridgeContents = await db.fridge_inventory.get({
-      customer_id: +request.params.customerId,
+    const fridgeContents = await db.fridge_inventory.getCustomerId(request.params.customerId);
+    response.json({
+      customerId: fridgeContents[0].id,
+      name: fridgeContents[0].name,
+      amount: fridgeContents[0].amount,
     });
-    response.json(fridgeContents);
   } catch (error) {
     response.status(error).send(500);
   }
@@ -48,6 +45,10 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
 router.post('/use-product', async (request, response) => {
   /**
    * get customerId + cart = {[name: 'x', amount: - 1]}
+   * request {
+     "customerId": "1",
+    "cart": [{"name": "5", "amount": "1"}]
+    }
    * fridge content should be reduced by this amount
    */
   try {
