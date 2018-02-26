@@ -18,8 +18,8 @@ export default class App extends Component {
       'なす',
       'あじ',
       'すし',
-      'みそらめん',
-      'しおらめん',
+      'みそらーめん',
+      'しおらーめん',
       'しお',
     ];
   }
