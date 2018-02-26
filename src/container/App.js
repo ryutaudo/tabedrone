@@ -12,6 +12,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addEntryToFridge(name, amount)),
   removeEntryFromFridge: (name, amount) =>
     dispatch(removeEntryFromFridge(name, amount)),
+  initProductList: listOfProducts =>
+    dispatch(listOfProducts(listOfProducts)),
 });
 
 

@@ -11,15 +11,12 @@ const db = require('../db/index');
 /* GET fridge-content */
 router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
-    console.log('db is: ', db.fridge_inventory, request.params);
-    // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
     const fridgeContents = await db.fridge_inventory.get({
       customer_id: +request.params.customerId,
     });
-    response.send(fridgeContents);
+    response.json(fridgeContents);
   } catch (error) {
-    console.error('Error from server/routes/index.js fridge contents endpoint!', error);
-    response.status('Internal server error').send(500);
+    response.status(error).send(500);
   }
 });
 /**
@@ -77,8 +74,6 @@ router.post('/order', async (request, response) => {
    * 2. return status
    */
 
-   
-  //
 
   // 1. loading customer id from geocode
   // 2. loading all supermarkets from db
@@ -124,17 +119,17 @@ router.post('/order', async (request, response) => {
     // point 3
     console.log(distanceInCentimeter);
 
+    const supermarketId = 1;
 
     const orders = await db.order
       .create({
         customer_id: request.body.customerId,
         status: 'OPEN',
-        supermarket_id: request.body.supermarketId,
+        supermarket_id: supermarketId,
       }).into('order');
     response.send(orders);
   } catch (error) {
-    console.error('Error from server/routes/index.js order post endpoint!', error);
-    response.send(500, 'Internal server error');
+    response.send(500, error);
   }
 });
 /*
@@ -147,28 +142,19 @@ router.post('/order', async (request, response) => {
 
 /* GET order */
 router.get('/orders/:orderId', async (request, response) => {
-  /**
-   * is inside the request.
-   * name: cart
-   * value: [{name: 'apple', amout: 4}, {...}]
-   */
   try {
-    console.log('db is: ', db.order, request.params, request.params.orderId, request.params.order_id);
-    // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
-    const orderInfo = await db.order.get({ order_id: +request.params.orderId });
-    response.send(orderInfo);
-  } catch (error) {
-    console.error('Error from server/routes/index.js orderInfo get endpoint!', error);
-    response.status('Internal server error').send(500);
-  }
+    const orderId = +request.params.orderId;
+    const orderInfo = await db.order.get({ order_id: orderId });
+    const cart = db.order_products.get({ order_id: orderId });
 
-  /*
-  response.json({
-    orderId: 1,
-    status: 'OPEN', // OPEN / CLOSE
-    cart: [{ name: 'apple', amount: 4 }],
-  });
-  */
+    response.json({
+      orderId: orderInfo.order_id,
+      status: orderInfo.status,
+      cart,
+    });
+  } catch (error) {
+    response.status(error).send(500);
+  }
 });
 
 module.exports = router;
