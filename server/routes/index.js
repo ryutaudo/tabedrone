@@ -94,13 +94,17 @@ router.get('/orders/:orderId', async (request, response) => {
    * value: [{name: 'apple', amout: 4}, {...}]
    */
   try {
-    console.log('db is: ', db.order, request.params, request.params.orderId, request.params.order_id);
-    // const fridgeContents = await db.select('customer_id').from('fridge_inventory');
-    const orderInfo = await db.order.get({ order_id: +request.params.orderId });
-    response.send(orderInfo);
+    const orderId = +request.params.orderId;
+    const orderInfo = await db.order.get({ order_id: orderId });
+    const cart = db.order_products.get({ order_id: orderId });
+
+    response.json({
+      orderId: orderInfo.order_id,
+      status: orderInfo.status,
+      cart,
+    });
   } catch (error) {
-    console.error('Error from server/routes/index.js orderInfo get endpoint!', error);
-    response.status('Internal server error').send(500);
+    response.status(error).send(500);
   }
 
   /*
