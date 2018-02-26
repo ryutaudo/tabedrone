@@ -11,44 +11,38 @@ export default class App extends Component {
     super(props);
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
+
+    this.products = [
+      'にく',
+      'とりにく',
+      'なす',
+      'あじ',
+      'すし',
+      'みそらめん',
+      'しおらめん',
+      'しお',
+    ];
   }
 
   async addFridgeEntry(event, name = '', amount = 1) {
     event.preventDefault();
-    if (name !== '') {
-      this.props.addEntryToFridge(name, amount);
 
-      await fetch(
-        '/api/order',
-        {
-          method: 'POST',
-          headers: new Headers({
-            'content-type': 'application/json',
-          }),
-          body: JSON.stringify({ customerId: this.props.customerId, cart: [{ name, amount }] }),
-        },
-      );
-    } else {
-      confirmAlert({
-        title: 'Buy new product',
-        message: 'blabla', // @todo add product-list
-        confirmLabel: 'Buy',
-        cancelLabel: 'Cancel',
-        onConfirm: async function () {
-          // send to server
-          await fetch(
-            '/api/order',
-            {
-              headers: new Headers({
-                'content-type': 'application/json',
-              }),
-              method: 'POST',
-              body: JSON.stringify({ name: 'not implemented', amount }),
-            },
-          ).then(response => response.json());
-        }.bind(this),
-      });
+    if (name === '') {
+      name = document.getElementById('new-product').value;
     }
+
+    this.props.addEntryToFridge(name, amount);
+
+    await fetch(
+      '/api/order',
+      {
+        method: 'POST',
+        headers: new Headers({
+          'content-type': 'application/json',
+        }),
+        body: JSON.stringify({ customerId: this.props.customerId, cart: [{ name, amount }] }),
+      },
+    );
   }
 
   async removeFridgeEntry(event, name = '', amount = 1) {
@@ -89,9 +83,19 @@ export default class App extends Component {
             </div>
           ))
         }
-        <div className="inventoryEntry" id="add-fridge-entry" onClick={event => this.addFridgeEntry(event)}>
-          add a new product...<br />
-          +
+        <div className="inventoryEntry" id="add-fridge-entry">
+            add new product:<br />
+            <select id="new-product">
+              {
+                this.products.filter(product => !Object.keys(this.props.fridgeContent).includes(product))
+                .map(product => (
+                    <option value={product}>{product}</option>
+                ))
+              }
+            </select>
+          <div className="iconList" onClick={event => this.addFridgeEntry(event)}>
+            <div>+</div>
+          </div>
         </div>
       </div>
     </div>);
