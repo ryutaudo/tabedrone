@@ -8,11 +8,12 @@ const db = require('../db/index');
 router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
     const fridgeContents = await db.fridge_inventory.getCustomerId(request.params.customerId);
-    response.json({
-      customerId: fridgeContents[0].id,
-      name: fridgeContents[0].name,
-      amount: fridgeContents[0].amount,
-    });
+    response.json(
+      fridgeContents.map(product => ({
+        customerId: product.id,
+        name: product.name,
+        amount: product.amount,
+      })));
     /** response.json([
       {
         id: 1, // customer based unique auto-increment. start: 1
