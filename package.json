@@ -17,7 +17,7 @@
     "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
     "rollback": "knex rollback --knexfile ./server/db/knexfile.js",
     "seed": "knex seed:run --knexfile ./server/db/knexfile.js",
-    "postinstall": "yarn migrate && yarn seed"
+    "postinstall": "webpack && yarn migrate && yarn seed"
   },
   "dependencies": {
     "airmap-map-sdk": "^2.4.0",

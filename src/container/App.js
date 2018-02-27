@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
-import { addEntryToFridge, removeEntryFromFridge } from '../action/index';
+import { addEntryToFridge, removeEntryFromFridge, initProductList } from '../action/index';
 import App from '../components/App.jsx';
-
-console.log(111, App);
 
 const mapStateToProps = state => ({
   fridgeContent: state.fridgeContent,
@@ -15,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
   removeEntryFromFridge: (name, amount) =>
     dispatch(removeEntryFromFridge(name, amount)),
   initProductList: listOfProducts =>
-    dispatch(listOfProducts(listOfProducts)),
+    dispatch(initProductList(listOfProducts)),
 });
 
 const VisibleApp = connect(

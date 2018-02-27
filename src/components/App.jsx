@@ -24,15 +24,16 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    const products = await fetch(
+    const productsResponse = await fetch(
       `/api/fridge-contents/${this.props.customerId}`,
       {
-        method: 'POST',
+        method: 'GET',
         headers: new Headers({
           'content-type': 'application/json',
         }),
       },
     );
+    const products = await productsResponse.json();
     const productList = products.map(product => ({ name: product.name, amount: product.amount }));
 
     this.props.initProductList(productList);
