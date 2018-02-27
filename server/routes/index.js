@@ -21,12 +21,13 @@ const db = require('../db/index');
 /* GET fridge-content */
 router.get('/fridge-contents/:customerId', async (request, response) => {
   try {
-    // const fridgeContents = await db.fridge_inventory.getCustomerId(request.params.customerId);
-    // response.json({
-    //   customerId: fridgeContents[0].id,
-    //   name: fridgeContents[0].name,
-    //   amount: fridgeContents[0].amount,
-    response.json([
+    const fridgeContents = await db.fridge_inventory.getCustomerId(request.params.customerId);
+    response.json({
+      customerId: fridgeContents[0].id,
+      name: fridgeContents[0].name,
+      amount: fridgeContents[0].amount,
+    });
+    /** response.json([
       {
         id: 1, // customer based unique auto-increment. start: 1
         name: 'apple',
@@ -47,8 +48,7 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
         name: 'wine',
         amount: 0,
       },
-    ]);
-    // });
+    ]);*/
   } catch (error) {
     response.status(error).send(500);
   }
