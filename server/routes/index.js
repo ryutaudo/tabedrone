@@ -1,3 +1,18 @@
+const getDistance = require('./util/index');
+
+// const geocodeFromRoppongiHills = { latitude: 35.6817124, longitude: 139.7166117 };
+// const geocodeFromAkihabara = { latitude: 35.7022077, longitude: 139.7722703 };
+
+// // point 2
+// const distanceInCentimeter = getDistance (
+//      geocodeFromRoppongiHills,
+//      geocodeFromAkihabara
+// );
+
+// // point 3
+// console.log("cm distance is:::: ", distanceInCentimeter);
+
+// console.log("get distance", getDistance())
 const express = require('express');
 
 const router = express.Router();
@@ -69,12 +84,12 @@ router.post('/order', async (request, response) => {
   /**
    * is inside the request.
    * customerId: 1
-   * cart: [{name: 'apple', amount: 4}, {...}]
-   * 
-   * 1. decrease amount from fridge query
-   * 2. return status
+   * cart: [{name: 'apple', amount: 4}, {...}] 
+    {
+     "customerId": "3",
+    "cart": [{"name": "kyoko", "amount": "3"}]
+    }
    */
-
 
   // 1. loading customer id from geocode
   // 2. loading all supermarkets from db
@@ -83,34 +98,44 @@ router.post('/order', async (request, response) => {
   // 5. increase of amount in fridge_inventory
   // 6. new created orderid  
 
-  // console.log("post orders is:", db.order.create);
-  // from Christian's github https://github.com/ChristianSchmidt1981/meetup-02-21-2018/blob/master/distance-with-curvature.js
-  function getDistance(geocodeA, geocodeB) {
-    // point 1
-    const between2parallels = 111.3; // unit: km
-    const between2meridians = 71.5; // unit: km
-
-    const rad = 0.01745; // 1° = π/180 rad ≈ 0.01745
-    const lat = (geocodeA.latitude - geocodeB.latitude) / 2 * rad;
-
-    // point 2
-    const dx = between2meridians * Math.cos(lat) * (geocodeA.longitude - geocodeB.longitude);
-    const dy = between2parallels * (geocodeA.latitude - geocodeB.latitude);
-
-    // point 3
-    return Math.sqrt((dx * dx) + (dy * dy));
-  }
   try {
+    const customerId = +request.body.customerId;  //3
+    const customerInfo = await db.customer.get({ id: customerId });
+    const supermarketInfo = +await db.supermarket.list();
+     const cartInput = request.body.cart;
+     const fridgeInv = db.fridge_inventory.getAllProducts(customerId, cartInput);
+
+    console.log( "reqqqqq------", customerId, customerInfo, customerInfo.latitude, cartInput, fridgeInv);
+    console.log( "reqqqqq++ ", supermarketInfo);
     // point 1
     const geocodeFromCustomer = await db.customer.get({
-      latitude: +request.params.latitude,
-      long: +request.params.longitude,
-    });
-    const geocodeFromSupermarket = await db.customer.get({
-      latitude: +request.params.latitude,
-      long: +request.params.longitude,
+      latitude: +request.body.latitude,
+      long: +request.body.longitude,
     });
 
+    // loop over supermarket geocodes
+      //check if customer geocode equals or is close to a supermarket geocode
+
+      /*
+      exact match
+      y = 6;
+      arr = [1,2,6,11];
+      for (i=0;i<arr.length;i++){
+        if(y===arr[i]){
+          return arr[i];
+          }
+      }      
+        */
+    const geocodeFromSupermarket = await db.customer.get({
+      latitude: +request.body.latitude,
+      long: +request.body.longitude,
+    });
+      console.log('get distance is: ', getDistance(
+        geocodeFromCustomer,
+        geocodeFromSupermarket,
+      ));
+    
+    
     // point 2
     const distanceInCentimeter = getDistance(
       geocodeFromCustomer,
@@ -118,7 +143,7 @@ router.post('/order', async (request, response) => {
     );
 
     // point 3
-    console.log(distanceInCentimeter);
+   console.log("distaince in cM is: ", geocodeFromCustomer, geocodeFromSupermarket, distanceInCentimeter);
 
     const supermarketId = 1;
 
