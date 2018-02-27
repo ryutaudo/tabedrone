@@ -29,5 +29,6 @@ module.exports = knex =>
         }
 
         throw new Error(`Error finding order id:${params.id}`);
-      });
+      })
+      .catch(error => console.log(error));
   };
