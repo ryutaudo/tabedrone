@@ -4,6 +4,11 @@ const addEntryToFridge = (contentName, amount) => ({
   amount,
 });
 
+const initProductList = listOfProducts => ({
+  type: 'INIT',
+  listOfProducts,
+});
+
 const removeEntryFromFridge = (contentName, amount) => ({
   type: 'REMOVE_FRIDGE_CONTENT',
   contentName,
@@ -13,4 +18,5 @@ const removeEntryFromFridge = (contentName, amount) => ({
 module.exports = {
   addEntryToFridge,
   removeEntryFromFridge,
+  initProductList,
 };

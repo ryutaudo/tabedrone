@@ -28,6 +28,7 @@ body {
   float: left;
   width: 30%;
   margin-right: 10px;
+  height: 70px;
 }
 
 .productName {
@@ -42,4 +43,10 @@ body {
   text-align: center;
   line-height: 20px;
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.iconList div:hover {
+  background-color: #555;
+  color: #fff;
 }
