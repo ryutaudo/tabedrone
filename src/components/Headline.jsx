@@ -7,7 +7,7 @@ import '../styles/styles.css';
 const Headline = () => (
   <div className="headlinestyle">
     <header className="headlineheader">
-      Tabedrone Logo
+      Tabedrone Grocery Delivery Service
     </header>
   </div>
 );
