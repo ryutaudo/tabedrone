@@ -8,7 +8,6 @@ const DefaultState = {
 };
 
 const reducers = (state = DefaultState, action) => {
-  console.log(state.cart);
   const getCopyFromState = () => JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'ADD_FRIDGE_CONTENT': {
