@@ -5,6 +5,7 @@ import App from '../components/App.jsx';
 const mapStateToProps = state => ({
   fridgeContent: state.fridgeContent,
   customerId: state.customerId,
+  cart: state.cart,
 });
 
 const mapDispatchToProps = dispatch => ({

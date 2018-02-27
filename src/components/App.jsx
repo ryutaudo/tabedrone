@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 
@@ -10,7 +11,7 @@ export default class App extends Component {
     super(props);
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.products = [
       'にく',
       'とりにく',
@@ -77,11 +78,27 @@ export default class App extends Component {
     );
   }
 
+  handleSubmit() {
+    confirmAlert({
+      title: 'Confirm your order',                        // Title dialog
+      message: JSON.stringify(this.props.cart),               // Message dialog
+      // childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
+      confirmLabel: 'Confirm',                           // Text button confirm
+      cancelLabel: 'Cancel',                             // Text button cancel
+      onConfirm: () => alert('Action after Confirm'),    // Action after Confirm
+      onCancel: () => alert('Action after Cancel'),      // Action after Cancel
+    })
+  };
+    
+
+
   render() {
     return (<div>
+      
       <Headline />
 
       <div className="fridge">
+    
         {
           Object.keys(this.props.fridgeContent).map((name, idx) => (
             <div className="inventoryEntry" key={idx}>
@@ -89,13 +106,15 @@ export default class App extends Component {
               <strong>ammount:</strong> {this.props.fridgeContent[name]}<br />
               <div className="iconList">
                 <div
-                  id="add-fridge-single-entry" 
-                  onClick={event => this.addFridgeEntry(event, name)}>
+                  id="add-fridge-single-entry"
+                  onClick={event => this.addFridgeEntry(event, name)}
+                >
                   +
                 </div>
                 <div
                   id="remove-fridge-single-entry"
-                  onClick={event => this.removeFridgeEntry(event, name)}>
+                  onClick={event => this.removeFridgeEntry(event, name)}
+                >
                   -
                 </div>
               </div>
@@ -104,23 +123,25 @@ export default class App extends Component {
         }
         <div className="inventoryEntry" id="add-fridge-entry">
             add new product:<br />
-            <select id="new-product">
+          <select id="new-product">
               {
                 this.products
                   .filter(product =>
                     !Object.keys(this.props.fridgeContent).includes(product))
                 .map((product, idx) => (
-                    <option key={idx} value={product}>{product}</option>
+                  <option key={idx} value={product}>{product}</option>
                 ))
               }
             </select>
           <div
             className="iconList"
-            onClick={event => this.addFridgeEntry(event)}>
+            onClick={event => this.addFridgeEntry(event)}
+          >
             <div>+</div>
           </div>
         </div>
       </div>
-    </div>);
+      <button onClick={this.handleSubmit}>Submit order</button>
+            </div>);
   }
 }
