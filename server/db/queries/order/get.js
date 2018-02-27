@@ -22,11 +22,13 @@ module.exports = knex =>
       .where({ id: params.order_id })
       .select()
       .then((dbRawData) => {
+        console.log('db-order-get', dbRawData);
         // return one order-object
         if (dbRawData.length === 1) {
           return dbRawData[0];
         }
 
         throw new Error(`Error finding order id:${params.id}`);
-      });
+      })
+      .catch(error => console.log(error));
   };

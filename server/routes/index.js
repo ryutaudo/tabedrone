@@ -13,6 +13,28 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
       name: fridgeContents[0].name,
       amount: fridgeContents[0].amount,
     });
+    /** response.json([
+      {
+        id: 1, // customer based unique auto-increment. start: 1
+        name: 'apple',
+        amount: 3,
+      },
+      {
+        id: 2, // customer based unique auto-increment. start: 1
+        name: 'orange',
+        amount: 5,
+      },
+      {
+        id: 3, // customer based unique auto-increment. start: 1
+        name: 'milk',
+        amount: 2,
+      },
+      {
+        id: 4, // customer based unique auto-increment. start: 1
+        name: 'wine',
+        amount: 0,
+      },
+    ]);*/
   } catch (error) {
     response.status(error).send(500);
   }
