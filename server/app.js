@@ -24,7 +24,7 @@ app.use('/api', index);
 
 // catch 404 and forward to error handler
 app.use((request, response, next) => {
-  const error = new Error('Not Found Test');
+  const error = new Error('Not Found Test1');
   error.status = 404;
   next(error);
 });
