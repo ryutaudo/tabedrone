@@ -5,7 +5,7 @@ import Headline from '../container/Headline';
 /**
  * @todo load init inventore from the database and remove dummy data from the reducer
  */
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
@@ -88,10 +88,14 @@ class App extends Component {
               <h2 className="productName">{name}</h2>
               <strong>ammount:</strong> {this.props.fridgeContent[name]}<br />
               <div className="iconList">
-                <div id="add-fridge-single-entry" onClick={event => this.addFridgeEntry(event, name)}>
+                <div
+                  id="add-fridge-single-entry" 
+                  onClick={event => this.addFridgeEntry(event, name)}>
                   +
                 </div>
-                <div id="remove-fridge-single-entry" onClick={event => this.removeFridgeEntry(event, name)}>
+                <div
+                  id="remove-fridge-single-entry"
+                  onClick={event => this.removeFridgeEntry(event, name)}>
                   -
                 </div>
               </div>
@@ -102,13 +106,17 @@ class App extends Component {
             add new product:<br />
             <select id="new-product">
               {
-                this.products.filter(product => !Object.keys(this.props.fridgeContent).includes(product))
+                this.products
+                  .filter(product =>
+                    !Object.keys(this.props.fridgeContent).includes(product))
                 .map((product, idx) => (
                     <option key={idx} value={product}>{product}</option>
                 ))
               }
             </select>
-          <div className="iconList" onClick={event => this.addFridgeEntry(event)}>
+          <div
+            className="iconList"
+            onClick={event => this.addFridgeEntry(event)}>
             <div>+</div>
           </div>
         </div>
@@ -116,5 +124,3 @@ class App extends Component {
     </div>);
   }
 }
-console.log(33, App);
-export default { App };

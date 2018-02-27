@@ -1,6 +1,6 @@
 module.exports = knex => (params) => {
   // error validation
-  // console.log("order create params: ", params);
+
   if (!params) {
     throw new Error('please add object');
   }
@@ -27,8 +27,26 @@ module.exports = knex => (params) => {
     throw new Error('customer_id should be a number');
   }
   if (params.customer_id <= 0) {
-    throw new Error('number-value in the property customer_id should be greater 0');
+    throw new Error('number-value in the property customerId: should be greater 0');
   }
-
-  return knex('order').insert(params);
+  return knex('order')
+    .where({ customer_id: params.customer_id })
+    .insert(params)
+    .then(() => knex('order')
+      .where({ customer_id: params.customer_id })
+      .select()
+      .then((orderList) => {
+        let maxOrderId = 0;
+        orderList.forEach((order) => {
+          if (maxOrderId < order.id) {
+            maxOrderId = order.id;
+          }
+        });
+        // console.log("returned data outputs: ", maxOrderId);
+        return maxOrderId;
+      }))
+    .catch((error) => {
+      console.log(error);
+      // error
+    });
 };

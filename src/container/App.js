@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addEntryToFridge, removeEntryFromFridge, initProductList } from '../action/index';
-import App from '../components/App';
+import App from '../components/App.jsx';
 
 const mapStateToProps = state => ({
   fridgeContent: state.fridgeContent,
