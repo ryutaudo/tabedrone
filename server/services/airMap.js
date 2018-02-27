@@ -92,13 +92,13 @@ class AirMap {
    * @return Promise
    */
   getPilotAircraft(pilotId) {
-    return this.getAccessToken()
-      .then(token => this.getResponse(
-        `${this.baseUrl}/pilot/v2/${pilotId}/aircraft`,
-        {},
-        `Bearer ${token}`,
-      ))
-      .catch(error => console.error(error));
+    // return this.getAccessToken()
+    //   .then(token => this.getResponse(
+    //     `${this.baseUrl}/pilot/v2/${pilotId}/aircraft`,
+    //     {},
+    //     `Bearer ${token}`,
+    //   ))
+    //   .catch(error => console.error(error));
   }
 
   /**

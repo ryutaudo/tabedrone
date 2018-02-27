@@ -100,7 +100,6 @@ router.post('/order', async (request, response) => {
 
   try {
     // console.log('reqqqqq++ ', request.body);
-
     // order store method {customerId: 1, status:"OPEN", carts:[{productId:1, amount:1, orderId:1}]}
     const order = new Order();
     const orderStoredId = order.store({
@@ -108,11 +107,14 @@ router.post('/order', async (request, response) => {
       status: 'OPEN',
       cart: request.body.cart,
     });
+
     response.json({
       orderId: orderStoredId,
       customerId: request.body.customerId,
+      cart: request.body.cart,
       status: 'successful',
     });
+
     // response.send(request.body.order);
   } catch (error) {
     response.send(500, error);
