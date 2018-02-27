@@ -6,10 +6,5 @@ exports.seed = knex => knex('fridge_inventory').del()
       amount: 3,
       customer_id: 1,
     },
-    {
-      product_id: 2,
-      amount: 5,
-      customer_id: 1,
-    },
   ]));
 
