@@ -50,3 +50,13 @@ body {
   background-color: #555;
   color: #fff;
 }
+
+.submitButton {
+  margin-top: 20px;
+  margin-left: 20px;
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+  padding: 30px 32px;
+  font-size: 16px;
+}

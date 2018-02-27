@@ -80,30 +80,30 @@ export default class App extends Component {
 
   handleSubmit() {
     confirmAlert({
-      title: 'Confirm your order',                        // Title dialog
-      message: JSON.stringify(this.props.cart),               // Message dialog
+      title: 'Confirm your order', // Title dialog
+      message: JSON.stringify(this.props.cart), // Message dialog
       // childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
-      confirmLabel: 'Confirm',                           // Text button confirm
-      cancelLabel: 'Cancel',                             // Text button cancel
-      onConfirm: () => alert('Action after Confirm'),    // Action after Confirm
-      onCancel: () => alert('Action after Cancel'),      // Action after Cancel
-    })
-  };
+      confirmLabel: 'Confirm', // Text button confirm
+      cancelLabel: 'Cancel', // Text button cancel
+      onConfirm: () => alert('Action after Confirm'), // Action after Confirm
+      onCancel: () => alert('Action after Cancel'), // Action after Cancel
+    });
+  }
     
 
 
   render() {
     return (<div>
-      
+
       <Headline />
 
       <div className="fridge">
-    
+
         {
           Object.keys(this.props.fridgeContent).map((name, idx) => (
             <div className="inventoryEntry" key={idx}>
               <h2 className="productName">{name}</h2>
-              <strong>ammount:</strong> {this.props.fridgeContent[name]}<br />
+              <strong>amount:</strong> {this.props.fridgeContent[name]}<br />
               <div className="iconList">
                 <div
                   id="add-fridge-single-entry"
@@ -124,7 +124,7 @@ export default class App extends Component {
         <div className="inventoryEntry" id="add-fridge-entry">
             add new product:<br />
           <select id="new-product">
-              {
+            {
                 this.products
                   .filter(product =>
                     !Object.keys(this.props.fridgeContent).includes(product))
@@ -132,7 +132,7 @@ export default class App extends Component {
                   <option key={idx} value={product}>{product}</option>
                 ))
               }
-            </select>
+          </select>
           <div
             className="iconList"
             onClick={event => this.addFridgeEntry(event)}
@@ -140,8 +140,8 @@ export default class App extends Component {
             <div>+</div>
           </div>
         </div>
-      </div>
-      <button onClick={this.handleSubmit}>Submit order</button>
-            </div>);
+      </div>    
+        <button class="submitButton" onClick={this.handleSubmit}>Submit order</button>
+    </div>);
   }
 }
