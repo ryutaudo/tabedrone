@@ -116,4 +116,4 @@ class App extends Component {
   }
 }
 console.log(33, App);
-export default App;
+export default { App };
