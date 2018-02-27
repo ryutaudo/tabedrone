@@ -21680,6 +21680,12 @@ var _index = __webpack_require__(72);
 
 var _App = __webpack_require__(73);
 
+var _App2 = _interopRequireDefault(_App);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+console.log(111, _App2.default);
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     fridgeContent: state.fridgeContent,
@@ -21701,8 +21707,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-console.log(_App.App);
-var VisibleApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App.App);
+var VisibleApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App2.default);
 
 exports.default = VisibleApp;
 
@@ -21880,14 +21885,18 @@ var App = function (_Component) {
                 { className: 'iconList' },
                 _react2.default.createElement(
                   'div',
-                  { id: 'add-fridge-single-entry', onClick: function onClick(event) {
+                  {
+                    id: 'add-fridge-single-entry',
+                    onClick: function onClick(event) {
                       return _this2.addFridgeEntry(event, name);
                     } },
                   '+'
                 ),
                 _react2.default.createElement(
                   'div',
-                  { id: 'remove-fridge-single-entry', onClick: function onClick(event) {
+                  {
+                    id: 'remove-fridge-single-entry',
+                    onClick: function onClick(event) {
                       return _this2.removeFridgeEntry(event, name);
                     } },
                   '-'
@@ -21915,7 +21924,9 @@ var App = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'iconList', onClick: function onClick(event) {
+              {
+                className: 'iconList',
+                onClick: function onClick(event) {
                   return _this2.addFridgeEntry(event);
                 } },
               _react2.default.createElement(
@@ -21933,7 +21944,6 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
-console.log(33, App);
 exports.default = App;
 
 /***/ }),
