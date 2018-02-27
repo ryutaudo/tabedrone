@@ -2,8 +2,8 @@
   "name": "tabedrone",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "hhttps://github.com/tabedrone/tabedrone",
-  "author": "Mr. Appointment <cschmidt.solingen@gmail.com>",
+  "repository": "https://github.com/tabedrone/tabedrone",
+  "author": "tabedrone <cschmidt.solingen@gmail.com>",
   "license": "Yavascript",
   "scripts": {
     "build": "webpack",
@@ -11,7 +11,8 @@
     "start": "node ./server/bin/www",
     "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
     "rollback": "knex rollback --knexfile ./server/db/knexfile.js",
-    "seed": "knex seed:run --knexfile ./server/db/knexfile.js"
+    "seed": "knex seed:run --knexfile ./server/db/knexfile.js",
+    "postinstall": "yarn migrate && yarn seed"
   },
   "dependencies": {
     "airmap-map-sdk": "^2.4.0",
