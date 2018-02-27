@@ -3,7 +3,6 @@ module.exports = knex =>
    * @param object params
    */
   (params) => {
-    console.log("get order ", params);
     // error validation
     if (!params) {
       throw new Error('please add object');
@@ -22,7 +21,6 @@ module.exports = knex =>
       .where({ id: params.order_id })
       .select()
       .then((dbRawData) => {
-        console.log('db-order-get', dbRawData);
         // return one order-object
         if (dbRawData.length === 1) {
           return dbRawData[0];

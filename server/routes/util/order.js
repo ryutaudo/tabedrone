@@ -83,7 +83,6 @@ class Order {
 
   async getProductId(name) {
     const productList = await db.product.list();
-     console.log("getprodID ", +productList.filter(product => name === product.name)[0].id);
      return +productList.filter(product => name === product.name)[0].id;
   }
   // 5. increase of amount in fridge_inventory

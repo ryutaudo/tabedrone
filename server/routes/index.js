@@ -65,7 +65,7 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
   */
 
 /* POST order */
-router.post('/use-product', async (request, response) => {
+router.delete('/use-product', async (request, response) => {
   /**
    * get customerId + cart = {[name: 'x', amount: - 1]}
    * request {
@@ -75,7 +75,6 @@ router.post('/use-product', async (request, response) => {
    * fridge content should be reduced by this amount
    */
   try {
-    console.log('use-product endpt', request.body);
     db.fridge_inventory.getAllProducts(request.body.customerId, request.body.cart);
 
     response.json({
@@ -137,8 +136,7 @@ router.get('/orders/:orderId', async (request, response) => {
     const orderId = +request.params.orderId;
     const orderInfo = await db.order.get({ order_id: orderId });
     const cart = await db.order_products.get({ order_id: orderId });
-    console.log('order Id is ~~~~~', orderId, orderInfo, cart);
-
+    
 
     response.json({
       orderId: orderInfo.id,
