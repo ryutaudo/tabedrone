@@ -21933,6 +21933,7 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
+console.log(33, App);
 exports.default = App;
 
 /***/ }),
