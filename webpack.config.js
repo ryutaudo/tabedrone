@@ -7,7 +7,7 @@ module.exports = {
     loaders: [
       {
         loaders: ['style-loader', 'css-loader'],
-        test: /\.css$/,
+        test: /\.(css|png)$/,
       },
       {
         exclude: /node_modules/,
