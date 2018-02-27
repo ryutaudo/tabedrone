@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 
 /**
  * @todo load init inventore from the database and remove dummy data from the reducer
  */
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
@@ -117,3 +116,5 @@ export default class App extends Component {
     </div>);
   }
 }
+console.log(33, App);
+export default { App };
