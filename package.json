@@ -4,11 +4,16 @@
   "main": "index.js",
   "repository": "https://github.com/tabedrone/tabedrone",
   "author": "tabedrone <cschmidt.solingen@gmail.com>",
-  "license": "Yavascript",
+  "license": "MIT",
+  "rootDir": "src",
+  "engines": {
+    "node": "8.9.4"
+  },
   "scripts": {
     "build": "webpack",
     "hack": "webpack-dev-server --inline",
     "start": "node ./server/bin/www",
+
     "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
     "rollback": "knex rollback --knexfile ./server/db/knexfile.js",
     "seed": "knex seed:run --knexfile ./server/db/knexfile.js",
