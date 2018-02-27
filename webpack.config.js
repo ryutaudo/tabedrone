@@ -28,6 +28,7 @@ module.exports = {
   },
   plugins: [
     new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
+
   ],
   resolve: {
     extensions: ['.webpack.js', '.js', '.jsx'],
