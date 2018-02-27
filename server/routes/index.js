@@ -168,13 +168,20 @@ router.post('/order', async (request, response) => {
 
 /* GET order */
 router.get('/orders/:orderId', async (request, response) => {
+  /*
+
+  */
+  
   try {
+
     const orderId = +request.params.orderId;
     const orderInfo = await db.order.get({ order_id: orderId });
-    const cart = db.order_products.get({ order_id: orderId });
+    const cart = await db.order_products.get({ order_id: orderId });
+    console.log("order Id is ~~~~~", orderId, orderInfo, cart);
+
 
     response.json({
-      orderId: orderInfo.order_id,
+      orderId: orderInfo.id,
       status: orderInfo.status,
       cart,
     });
