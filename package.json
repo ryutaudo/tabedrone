@@ -7,7 +7,7 @@
   "license": "MIT",
   "rootDir": "src",
   "engines": {
-    "node": "8.9.4"
+    "node": "~8.9.4"
   },
   "scripts": {
     "build": "webpack",
