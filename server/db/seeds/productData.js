@@ -1,8 +1,1 @@
-exports.seed = knex => knex('product').del()
-  .then(() => knex('product').insert([
-    {
-      id: 1,
-      name: 'ラーメン',
-    },
-  ]));
-
+exports.seed = () => {};
