@@ -7,15 +7,14 @@
   "license": "MIT",
   "rootDir": "src",
   "engines": {
-    "node": "~8.9.4"
+    "node": ">=8.9.4"
   },
   "scripts": {
     "build": "webpack",
     "hack": "webpack-dev-server --inline",
     "start": "node ./server/bin/www",
-
     "migrate": "knex migrate:latest --knexfile ./server/db/knexfile.js",
-    "rollback": "knex rollback --knexfile ./server/db/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile ./server/db/knexfile.js",
     "seed": "knex seed:run --knexfile ./server/db/knexfile.js",
     "postinstall": "webpack && yarn migrate && yarn seed"
   },
