@@ -10,7 +10,7 @@ router.get('/fridge-contents/:customerId', async (request, response) => {
     const fridgeContents = await db.fridge_inventory.getCustomerId(request.params.customerId);
     response.json(
       fridgeContents.map(product => ({
-        customerId: product.id,
+        id: product.id,
         name: product.name,
         amount: product.amount,
       })));
