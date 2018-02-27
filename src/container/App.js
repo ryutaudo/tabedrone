@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(listOfProducts(listOfProducts)),
 });
 
-
+console.log(App);
 const VisibleApp = connect(
   mapStateToProps,
   mapDispatchToProps,
