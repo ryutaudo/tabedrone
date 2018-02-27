@@ -21701,6 +21701,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
+console.log(_App.App);
 var VisibleApp = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_App.App);
 
 exports.default = VisibleApp;
