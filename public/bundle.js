@@ -21625,13 +21625,15 @@ var DefaultState = {
   fridgeContent: {
     milch: 3,
     hamburger: 1
-  }
+  },
+  cart: {}
 };
 
 var reducers = function reducers() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DefaultState;
   var action = arguments[1];
 
+  console.log(state.cart);
   var getCopyFromState = function getCopyFromState() {
     return JSON.parse(JSON.stringify(state));
   };
@@ -21642,7 +21644,11 @@ var reducers = function reducers() {
         if (newState.fridgeContent[action.contentName] === undefined) {
           newState.fridgeContent[action.contentName] = 0;
         }
+        if (newState.cart[action.contentName] === undefined) {
+          newState.cart[action.contentName] = 0;
+        }
         newState.fridgeContent[action.contentName] += action.amount;
+        newState.cart[action.contentName] += 1;
         return newState;
       }
 
@@ -21650,8 +21656,12 @@ var reducers = function reducers() {
       {
         var _newState = getCopyFromState();
         _newState.fridgeContent[action.contentName] -= action.amount;
+        _newState.cart[action.contentName] -= 1;
         if (_newState.fridgeContent[action.contentName] <= 0) {
           delete _newState.fridgeContent[action.contentName];
+        }
+        if (_newState.cart[action.contentName] <= 0) {
+          delete _newState.cart[action.contentName];
         }
         return _newState;
       }
@@ -21684,8 +21694,6 @@ var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log(111, _App2.default);
-
 var mapStateToProps = function mapStateToProps(state) {
   return {
     fridgeContent: state.fridgeContent,
@@ -21702,7 +21710,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0, _index.removeEntryFromFridge)(name, amount));
     },
     initProductList: function initProductList(listOfProducts) {
-      return dispatch(listOfProducts(listOfProducts));
+      return dispatch((0, _index.initProductList)(listOfProducts));
     }
   };
 };
@@ -21799,12 +21807,13 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: async function componentDidMount() {
-      var products = await fetch('/api/fridge-contents/' + this.props.customerId, {
-        method: 'POST',
+      var productsResponse = await fetch('/api/fridge-contents/' + this.props.customerId, {
+        method: 'GET',
         headers: new Headers({
           'content-type': 'application/json'
         })
       });
+      var products = await productsResponse.json();
       var productList = products.map(function (product) {
         return { name: product.name, amount: product.amount };
       });
@@ -22163,17 +22172,29 @@ __webpack_require__(79);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import logo from '../styles/logo.png';
+
+// const logoURL = 'https://raw.githubusercontent.com/tabedrone/tabedrone/0fbc337366d720911d759869d804e8c95eceba21/src/styles/logo.png';
+
 var Headline = function Headline() {
   return _react2.default.createElement(
-    "div",
-    { className: "headlinestyle" },
+    'div',
+    { className: 'headlinestyle' },
     _react2.default.createElement(
-      "header",
-      { className: "headlineheader" },
-      "headline"
+      'header',
+      { className: 'headlineheader' },
+      'Tabedrone Logo'
     )
   );
 };
+
+// class Headline extends Component {
+//   render() {
+//     return (
+//         <img src={logoURL} alt="logo" />
+//     );
+//   }
+// }
 
 exports.default = Headline;
 
@@ -22236,7 +22257,7 @@ exports = module.exports = __webpack_require__(29)(false);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n}\r\n\r\n.headlinestyle {\r\n  padding: 2rem;\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  background-color: #1c7e88;\r\n}\r\n\r\n.headlineheader {\r\n  cursor: pointer;\r\n  margin-right: auto;\r\n}\r\n\r\n\r\n\r\n\r\n.fridge {\r\n  padding: 10px;\r\n}\r\n\r\n.inventoryEntry {\r\n  padding: 10px;\r\n  border: 1px solid #999;\r\n  background-color: #ccc;\r\n  float: left;\r\n  width: 30%;\r\n  margin-right: 10px;\r\n  height: 70px;\r\n}\r\n\r\n.productName {\r\n  margin: 0;\r\n}\r\n\r\n.iconList div {\r\n  border: 1px solid #aaa;\r\n  float: left;\r\n  width: 20px;\r\n  height: 20px;\r\n  text-align: center;\r\n  line-height: 20px;\r\n  margin-right: 10px;\r\n  cursor: pointer;\r\n}\r\n\r\n.iconList div:hover {\r\n  background-color: #555;\r\n  color: #fff;\r\n}", ""]);
+exports.push([module.i, "body {\n  margin: 0;\n}\n\n.headlinestyle {\n  padding: 2rem;\n  display: flex;\n  justify-content: flex-end;\n  background-color: #1c7e88;\n}\n\n.headlineheader {\n  cursor: pointer;\n  margin-right: auto;\n}\n\n\n\n\n.fridge {\n  padding: 10px;\n}\n\n.inventoryEntry {\n  padding: 10px;\n  border: 1px solid #999;\n  background-color: #ccc;\n  float: left;\n  width: 30%;\n  margin-right: 10px;\n  height: 70px;\n}\n\n.productName {\n  margin: 0;\n}\n\n.iconList div {\n  border: 1px solid #aaa;\n  float: left;\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  line-height: 20px;\n  margin-right: 10px;\n  cursor: pointer;\n}\n\n.iconList div:hover {\n  background-color: #555;\n  color: #fff;\n}", ""]);
 
 // exports
 

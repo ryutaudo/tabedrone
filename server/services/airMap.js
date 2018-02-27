@@ -92,6 +92,7 @@ class AirMap {
    * @return Promise
    */
   getPilotAircraft(pilotId) {
+    return new Response()
     // return this.getAccessToken()
     //   .then(token => this.getResponse(
     //     `${this.baseUrl}/pilot/v2/${pilotId}/aircraft`,
