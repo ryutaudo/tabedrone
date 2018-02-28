@@ -19,7 +19,5 @@ module.exports = knex => (params) => {
     throw new Error('please add the geocode');
   }
 
-  return knex('customer')
-    .insert(params)
-    .then(dbRawData => dbRawData);
+  return knex('customer').insert(params);
 };

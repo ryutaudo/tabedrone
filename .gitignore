@@ -62,5 +62,3 @@ typings/
 # Bundle files
 public/bundle.js
 public/bundle.js.map
-
-.vscode/launch.json

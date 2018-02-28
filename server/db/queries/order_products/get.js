@@ -1,4 +1,4 @@
-module.exports = knex =>
+module.exports = async knex =>
   /**
    * @param object params
    */
@@ -19,7 +19,6 @@ module.exports = knex =>
 
     return knex('order_products')
       .where({ order_id: params.order_id })
-      .select('order_products.id', 'order_products.amount', 'product.name')
-      .join('product', 'product.id', 'order_products.product_id')
+      .select()
       .then(dbRawData => dbRawData);
   };

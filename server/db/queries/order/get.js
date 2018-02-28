@@ -3,6 +3,7 @@ module.exports = knex =>
    * @param object params
    */
   (params) => {
+    console.log("get order ", params);
     // error validation
     if (!params) {
       throw new Error('please add object');
@@ -27,6 +28,5 @@ module.exports = knex =>
         }
 
         throw new Error(`Error finding order id:${params.id}`);
-      })
-      .catch(error => console.log(error));
+      });
   };
