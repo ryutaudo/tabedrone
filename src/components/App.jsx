@@ -84,8 +84,13 @@ export default class App extends Component {
       childrenElement: () => <div><br />{this.convertCartToString()}</div>, // Custom UI or Component
       confirmLabel: 'Confirm Order', // Text button confirm
       cancelLabel: 'Cancel Order', // Text button cancel
-      onConfirm: () => alert('Your drone is on the way!'), // Action after Confirm
-      onCancel: () => alert('Your canceled the order.'), // Action after Cancel
+      onConfirm: () => {
+        confirmAlert({
+          title: 'Order Sent', // Title dialog
+          message: 'We will send drone soon', // Message dialog
+          confirmLabel: 'OK', // Text button confirm
+        });
+      },
     });
   }
 
