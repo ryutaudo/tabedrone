@@ -15,8 +15,14 @@ const removeEntryFromFridge = (contentName, amount) => ({
   amount,
 });
 
+const updateNewProduct = newProduct => ({
+  type: 'UPDATE_NEW_PRODUCT',
+  newProduct,
+});
+
 module.exports = {
   addEntryToFridge,
   removeEntryFromFridge,
   initProductList,
+  updateNewProduct,
 };

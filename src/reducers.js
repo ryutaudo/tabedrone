@@ -6,6 +6,7 @@ const DefaultState = {
     Apple: 1,
   },
   cart: {},
+  newProduct: undefined,
 };
 
 const reducers = (state = DefaultState, action) => {
@@ -34,6 +35,12 @@ const reducers = (state = DefaultState, action) => {
       if (newState.cart[action.contentName] <= 0) {
         delete newState.cart[action.contentName];
       }
+      return newState;
+    }
+
+    case 'UPDATE_NEW_PRODUCT': {
+      const newState = getCopyFromState();
+      newState.newProduct = action.newProduct;
       return newState;
     }
 

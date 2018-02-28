@@ -21627,7 +21627,8 @@ var DefaultState = {
     Potato: 1,
     Apple: 1
   },
-  cart: {}
+  cart: {},
+  newProduct: undefined
 };
 
 var reducers = function reducers() {
@@ -21666,6 +21667,13 @@ var reducers = function reducers() {
         return _newState;
       }
 
+    case 'UPDATE_NEW_PRODUCT':
+      {
+        var _newState2 = getCopyFromState();
+        _newState2.newProduct = action.newProduct;
+        return _newState2;
+      }
+
     default:
       return state;
   }
@@ -21698,7 +21706,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     fridgeContent: state.fridgeContent,
     customerId: state.customerId,
-    cart: state.cart
+    cart: state.cart,
+    newProduct: state.newProduct
   };
 };
 
@@ -21712,6 +21721,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     initProductList: function initProductList(listOfProducts) {
       return dispatch((0, _index.initProductList)(listOfProducts));
+    },
+    updateNewProduct: function updateNewProduct(newProduct) {
+      return dispatch((0, _index.updateNewProduct)(newProduct));
     }
   };
 };
@@ -21750,10 +21762,18 @@ var removeEntryFromFridge = function removeEntryFromFridge(contentName, amount) 
   };
 };
 
+var updateNewProduct = function updateNewProduct(newProduct) {
+  return {
+    type: 'UPDATE_NEW_PRODUCT',
+    newProduct: newProduct
+  };
+};
+
 module.exports = {
   addEntryToFridge: addEntryToFridge,
   removeEntryFromFridge: removeEntryFromFridge,
-  initProductList: initProductList
+  initProductList: initProductList,
+  updateNewProduct: updateNewProduct
 };
 
 /***/ }),
@@ -21803,7 +21823,6 @@ var App = function (_Component) {
     _this.addFridgeEntry = _this.addFridgeEntry.bind(_this);
     _this.removeFridgeEntry = _this.removeFridgeEntry.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.products = ['Beef', 'Chicken', 'Eggplant', 'Salmon', 'Rice', 'Pasta', 'Salt', 'Sugar'];
     return _this;
   }
 
@@ -21881,6 +21900,13 @@ var App = function (_Component) {
       });
     }
   }, {
+    key: 'handleChange',
+    value: function handleChange(event) {
+      event.preventDefault();
+      var newProduct = event.target.value;
+      this.props.updateNewProduct(newProduct);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -21952,21 +21978,14 @@ var App = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'inventoryEntry', id: 'add-fridge-entry' },
-            'add new product:',
+            'Add new product:',
             _react2.default.createElement('br', null),
-            _react2.default.createElement(
-              'select',
-              { id: 'new-product' },
-              this.products.filter(function (product) {
-                return !Object.keys(_this2.props.fridgeContent).includes(product);
-              }).map(function (product, idx) {
-                return _react2.default.createElement(
-                  'option',
-                  { key: idx, value: product },
-                  product
-                );
-              })
-            ),
+            _react2.default.createElement('input', {
+              type: 'text',
+              id: 'new-product',
+              value: this.props.newProduct,
+              onChange: this.handleChange
+            }),
             _react2.default.createElement(
               'div',
               {
@@ -22476,7 +22495,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n  background-image: url(http://localhost:3000/fridge.jpg);\r\n  background-size: 136%;\r\n  background-repeat: no-repeat;\r\n  background-color: #050505;\r\n  background-position-y: -194px;\r\n  background-position-x: -240px;\r\n}\r\n\r\n.headlinestyle {\r\n  position: absolute;\r\n    right: 32px;\r\n    top: 50px;\r\n    background-image: url(http://localhost:3000/logo.png);\r\n    background-repeat: no-repeat;\r\n    width: 200px;\r\n    height: 176px;\r\n    background-size: 34%;\r\n}\r\n\r\n.headlineheader {\r\n  cursor: pointer;\r\n  margin-right: auto;\r\n  font-size: 36px;\r\n  font-style: Garamond;\r\n  color: white;\r\n}\r\n\r\n.fridge {\r\n  position: absolute;\r\n  left: 58vw;\r\n  top: 46vh;\r\n}\r\n\r\n@media (min-width: 1600px) {\r\n  .fridge {\r\n    left: 60vw;\r\n    top: 55vh;\r\n  }\r\n}\r\n.inventoryEntry {\r\n  padding: 10px;\r\n  border: 1px solid #999;\r\n  background-color: #ccc;\r\n  float: left;\r\n  width: 33%;\r\n  margin-right: 10px;\r\n  height: 70px;\r\n  display: flex;\r\n  flex-direction: row;\r\n}\r\n\r\n.productInfo {\r\n  display: block;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.productName {\r\n  margin: 0;\r\n}\r\n\r\n.iconList div {\r\n  border: 1px solid #aaa;\r\n  float: left;\r\n  width: 20px;\r\n  height: 20px;\r\n  text-align: center;\r\n  line-height: 20px;\r\n  margin-right: 10px;\r\n  cursor: pointer;\r\n}\r\n\r\n.iconList div:hover {\r\n  background-color: #555;\r\n  color: #fff;\r\n}\r\n\r\n.submitButton {\r\n  margin-top: 20px;\r\n  margin-left: 20px;\r\n  background-color: white; \r\n  color: black; \r\n  border: 2px solid #4CAF50;\r\n  padding: 30px 32px;\r\n  font-size: 16px;\r\n}\r\n\r\n.img-wrap {\r\n  margin-left: 10px;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\n  margin: 0;\n  background-image: url(http://localhost:3000/fridge.jpg);\n  background-size: 136%;\n  background-repeat: no-repeat;\n  background-color: #050505;\n  background-position-y: -194px;\n  background-position-x: -240px;\n}\n\n.headlinestyle {\n  position: absolute;\n    right: 32px;\n    top: 50px;\n    background-image: url(http://localhost:3000/logo.png);\n    background-repeat: no-repeat;\n    width: 200px;\n    height: 176px;\n    background-size: 34%;\n}\n\n.headlineheader {\n  cursor: pointer;\n  margin-right: auto;\n  font-size: 36px;\n  font-style: Garamond;\n  color: white;\n}\n\n.fridge {\n  position: absolute;\n  left: 58vw;\n  top: 46vh;\n}\n\n@media (min-width: 1600px) {\n  .fridge {\n    left: 60vw;\n    top: 55vh;\n  }\n}\n.inventoryEntry {\n  padding: 10px;\n  border: 1px solid #999;\n  background-color: #ccc;\n  float: left;\n  width: 33%;\n  margin-right: 10px;\n  height: 70px;\n  display: flex;\n  flex-direction: row;\n}\n\n.productInfo {\n  display: block;\n  margin-bottom: 10px;\n}\n\n.productName {\n  margin: 0;\n}\n\n.iconList div {\n  border: 1px solid #aaa;\n  float: left;\n  width: 20px;\n  height: 20px;\n  text-align: center;\n  line-height: 20px;\n  margin-right: 10px;\n  cursor: pointer;\n}\n\n.iconList div:hover {\n  background-color: #555;\n  color: #fff;\n}\n\n.submitButton {\n  margin-top: 20px;\n  margin-left: 20px;\n  background-color: white; \n  color: black; \n  border: 2px solid #4CAF50;\n  padding: 30px 32px;\n  font-size: 16px;\n}\n\n.img-wrap {\n  margin-left: 10px;\n}\n", ""]);
 
 // exports
 

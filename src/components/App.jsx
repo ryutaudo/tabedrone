@@ -12,16 +12,6 @@ export default class App extends Component {
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.products = [
-      'Beef',
-      'Chicken',
-      'Eggplant',
-      'Salmon',
-      'Rice',
-      'Pasta',
-      'Salt',
-      'Sugar',
-    ];
   }
 
   async componentDidMount() {
@@ -90,13 +80,16 @@ export default class App extends Component {
     });
   }
 
+  handleChange(event) {
+    event.preventDefault();
+    const newProduct = event.target.value;
+    this.props.updateNewProduct(newProduct);
+  }
+
   render() {
     return (<div>
-
       <Headline />
-
       <div className="fridge">
-
         {
           Object.keys(this.props.fridgeContent).map((name, idx) => (
             <div className="inventoryEntry" key={idx}>
@@ -130,17 +123,13 @@ export default class App extends Component {
           ))
         }
         <div className="inventoryEntry" id="add-fridge-entry">
-            add new product:<br />
-          <select id="new-product">
-            {
-                this.products
-                  .filter(product =>
-                    !Object.keys(this.props.fridgeContent).includes(product))
-                .map((product, idx) => (
-                  <option key={idx} value={product}>{product}</option>
-                ))
-              }
-          </select>
+          Add new product:<br />
+          <input
+            type="text"
+            id="new-product"
+            value={this.props.newProduct}
+            onChange={this.handleChange}
+          />
           <div
             className="iconList"
             onClick={event => this.addFridgeEntry(event)}
@@ -148,7 +137,7 @@ export default class App extends Component {
             <div>+</div>
           </div>
         </div>
-      </div>    
+      </div>
         <button class="submitButton" onClick={this.handleSubmit}>Submit order</button>
     </div>);
   }
