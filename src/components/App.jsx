@@ -73,7 +73,7 @@ export default class App extends Component {
     console.log('cart contents ', JSON.stringify(this.props.cart));
     const cartObject = this.props.cart;
 
-    //return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
+    // return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
     return Object.entries(cartObject).map(([key, value]) => <span>{key} : {value} <br /> </span>);
   }
 
@@ -90,10 +90,20 @@ export default class App extends Component {
           message: 'We will send drone soon', // Message dialog
           confirmLabel: 'OK', // Text button confirm
         });
+        setTimeout(() => {
+          confirmAlert({
+            title: 'Food arrived to customer', // Title dialog
+            confirmLabel: 'OK', // Text button confirm
+          });
+        }, 3000);
       },
     });
   }
 
+  // setTimeout(confirmAlert({
+  //   title: 'Order Sent', // Title dialog
+  //   confirmLabel: 'OK', // Text button confirm
+  // }),3000),
   handleChange(event) {
     event.preventDefault();
     const newProduct = event.target.value;
@@ -138,9 +148,9 @@ export default class App extends Component {
         }
         <div className="inventoryEntry" id="add-fridge-entry">
           <div className="content">
-          <div className="add-description">New product</div>
-          <div>
-          <input
+            <div className="add-description">New product</div>
+            <div>
+            <input
             type="text"
             id="new-product"
             value={this.props.newProduct}
@@ -149,7 +159,7 @@ export default class App extends Component {
           </div>
           </div>
           <div className="productInfo">
-          <div
+            <div
             className="iconList"
             onClick={event => this.addFridgeEntry(event)}
           >
@@ -157,8 +167,8 @@ export default class App extends Component {
           </div>
           </div>
         </div>
-      </div>    
-        <button class="submitButton" onClick={this.handleSubmit}>Submit order</button>
-    </div>);
+      </div>
+      <button className="submitButton" onClick={this.handleSubmit}>Submit order</button>
+            </div>);
   }
 }
