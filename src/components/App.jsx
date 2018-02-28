@@ -73,7 +73,7 @@ export default class App extends Component {
     console.log('cart contents ', JSON.stringify(this.props.cart));
     const cartObject = this.props.cart;
 
-    //return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
+    // return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
     return Object.entries(cartObject).map(([key, value]) => <span>{key} : {value} <br /> </span>);
   }
 
@@ -87,9 +87,17 @@ export default class App extends Component {
       onConfirm: () => {
         confirmAlert({
           title: 'Order Sent', // Title dialog
-          message: 'We will send drone soon', // Message dialog
+          message: 'We will send drone soon.', // Message dialog
+          childrenElement: () => <div><br />Flight Plan status and coordinates in progress... </div>,
           confirmLabel: 'OK', // Text button confirm
         });
+        setTimeout(() => {
+          confirmAlert({
+            title: 'Food arrived to customer!', // Title dialog
+            message: 'status: success', // Message dialog
+            confirmLabel: 'OK', // Text button confirm
+          });
+        }, 8000);
       },
     });
   }
@@ -138,9 +146,9 @@ export default class App extends Component {
         }
         <div className="inventoryEntry" id="add-fridge-entry">
           <div className="content">
-          <div className="add-description">New product</div>
-          <div>
-          <input
+            <div className="add-description">New product</div>
+            <div>
+            <input
             type="text"
             id="new-product"
             value={this.props.newProduct}
@@ -149,7 +157,7 @@ export default class App extends Component {
           </div>
           </div>
           <div className="productInfo">
-          <div
+            <div
             className="iconList"
             onClick={event => this.addFridgeEntry(event)}
           >
@@ -157,8 +165,8 @@ export default class App extends Component {
           </div>
           </div>
         </div>
-      </div>    
-        <button class="submitButton" onClick={this.handleSubmit}>Submit order</button>
-    </div>);
+      </div>
+      <button className="submitButton" onClick={this.handleSubmit}>Submit order</button>
+            </div>);
   }
 }
