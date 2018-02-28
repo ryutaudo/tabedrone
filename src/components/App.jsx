@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
+// import {Well, Panel, FormControl, FormGroup, ControlLabel, Button} from "react-bootstrap"
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 
@@ -83,14 +84,12 @@ export default class App extends Component {
       title: 'Confirm your order', // Title dialog
       message: JSON.stringify(this.props.cart), // Message dialog
       // childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
-      confirmLabel: 'Confirm', // Text button confirm
-      cancelLabel: 'Cancel', // Text button cancel
-      onConfirm: () => alert('Action after Confirm'), // Action after Confirm
-      onCancel: () => alert('Action after Cancel'), // Action after Cancel
+      confirmLabel: 'Confirm Order', // Text button confirm
+      cancelLabel: 'Cancel Order', // Text button cancel
+      onConfirm: () => alert('Your drone is on the way!'), // Action after Confirm
+      onCancel: () => alert('Your canceled the order.'), // Action after Cancel
     });
   }
-    
-
 
   render() {
     return (<div>
