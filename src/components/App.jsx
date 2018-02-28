@@ -118,7 +118,7 @@ export default class App extends Component {
               <div className="img-wrap">
                 <img
                   className="productIcon"
-                  src={`/img/${name}.png`}
+                  src={`${name}.png`}
                   alt={name}
                 />
               </div>
