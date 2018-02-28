@@ -3,7 +3,7 @@ const DefaultState = {
   fridgeContent: {
     Milk: 3,
     Potato: 1,
-    Oil: 1,
+    Apple: 1,
   },
   cart: {},
 };

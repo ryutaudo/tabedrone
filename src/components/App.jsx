@@ -100,21 +100,31 @@ export default class App extends Component {
         {
           Object.keys(this.props.fridgeContent).map((name, idx) => (
             <div className="inventoryEntry" key={idx}>
-              <h2 className="productName">{name}</h2>
-              <strong>amount:</strong> {this.props.fridgeContent[name]}<br />
-              <div className="iconList">
-                <div
-                  id="add-fridge-single-entry"
-                  onClick={event => this.addFridgeEntry(event, name)}
-                >
-                  +
+              <div className="productInfo">
+                <h2 className="productName">{name}</h2>
+                <strong>amount:</strong> {this.props.fridgeContent[name]}<br />
+                <div className="iconList">
+                  <div
+                    id="add-fridge-single-entry"
+                    onClick={event => this.addFridgeEntry(event, name)}
+                  >
+                    +
+                  </div>
+                  <div
+                    id="remove-fridge-single-entry"
+                    onClick={event => this.removeFridgeEntry(event, name)}
+                  >
+                    -
+                  </div>
                 </div>
-                <div
-                  id="remove-fridge-single-entry"
-                  onClick={event => this.removeFridgeEntry(event, name)}
-                >
-                  -
-                </div>
+              </div>
+              <div className="img-wrap">
+                <img
+                  src={`/img/${name}.png`}
+                  alt={name}
+                  height="50"
+                  width="50"
+                />
               </div>
             </div>
           ))

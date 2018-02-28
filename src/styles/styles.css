@@ -17,9 +17,6 @@ body {
   color: white;
 }
 
-
-
-
 .fridge {
   padding: 10px;
 }
@@ -32,6 +29,12 @@ body {
   width: 30%;
   margin-right: 10px;
   height: 70px;
+  display: flex;
+  flex-direction: row;
+}
+
+.productInfo {
+  display: block;
 }
 
 .productName {
@@ -62,4 +65,8 @@ body {
   border: 2px solid #4CAF50;
   padding: 30px 32px;
   font-size: 16px;
+}
+
+.img-wrap {
+  margin-left: 10px;
 }
