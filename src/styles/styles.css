@@ -29,10 +29,16 @@ body {
 
 .fridge {
   position: absolute;
-  left: 750px;
-  top: 201px;
+  left: 58vw;
+  top: 46vh;
 }
 
+@media (min-width: 1600px) {
+  .fridge {
+    left: 60vw;
+    top: 55vh;
+  }
+}
 .inventoryEntry {
   padding: 10px;
   border: 1px solid #999;
