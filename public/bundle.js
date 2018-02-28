@@ -21898,20 +21898,21 @@ var App = function (_Component) {
               { className: 'inventoryEntry', key: idx },
               _react2.default.createElement(
                 'div',
+                { className: 'img-wrap' },
+                _react2.default.createElement('img', {
+                  className: 'productIcon',
+                  src: '/img/' + name + '.png',
+                  alt: name
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'amount', title: 'amount' },
+                _this2.props.fridgeContent[name]
+              ),
+              _react2.default.createElement(
+                'div',
                 { className: 'productInfo' },
-                _react2.default.createElement(
-                  'h2',
-                  { className: 'productName' },
-                  name
-                ),
-                _react2.default.createElement(
-                  'strong',
-                  null,
-                  'amount:'
-                ),
-                ' ',
-                _this2.props.fridgeContent[name],
-                _react2.default.createElement('br', null),
                 _react2.default.createElement(
                   'div',
                   { className: 'iconList' },
@@ -21936,16 +21937,6 @@ var App = function (_Component) {
                     '-'
                   )
                 )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'img-wrap' },
-                _react2.default.createElement('img', {
-                  src: '/img/' + name + '.png',
-                  alt: name,
-                  height: '50',
-                  width: '50'
-                })
               )
             );
           }),
@@ -22476,7 +22467,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n  background-image: url(http://localhost:3000/fridge.jpg);\r\n  background-size: 136%;\r\n  background-repeat: no-repeat;\r\n  background-color: #050505;\r\n  background-position-y: -194px;\r\n  background-position-x: -240px;\r\n}\r\n\r\n.headlinestyle {\r\n  position: absolute;\r\n    right: 32px;\r\n    top: 50px;\r\n    background-image: url(http://localhost:3000/logo.png);\r\n    background-repeat: no-repeat;\r\n    width: 200px;\r\n    height: 176px;\r\n    background-size: 34%;\r\n}\r\n\r\n.headlineheader {\r\n  cursor: pointer;\r\n  margin-right: auto;\r\n  font-size: 36px;\r\n  font-style: Garamond;\r\n  color: white;\r\n}\r\n\r\n.fridge {\r\n  position: absolute;\r\n  left: 58vw;\r\n  top: 46vh;\r\n}\r\n\r\n@media (min-width: 1600px) {\r\n  .fridge {\r\n    left: 60vw;\r\n    top: 55vh;\r\n  }\r\n}\r\n.inventoryEntry {\r\n  padding: 10px;\r\n  border: 1px solid #999;\r\n  background-color: #ccc;\r\n  float: left;\r\n  width: 33%;\r\n  margin-right: 10px;\r\n  height: 70px;\r\n  display: flex;\r\n  flex-direction: row;\r\n}\r\n\r\n.productInfo {\r\n  display: block;\r\n  margin-bottom: 10px;\r\n}\r\n\r\n.productName {\r\n  margin: 0;\r\n}\r\n\r\n.iconList div {\r\n  border: 1px solid #aaa;\r\n  float: left;\r\n  width: 20px;\r\n  height: 20px;\r\n  text-align: center;\r\n  line-height: 20px;\r\n  margin-right: 10px;\r\n  cursor: pointer;\r\n}\r\n\r\n.iconList div:hover {\r\n  background-color: #555;\r\n  color: #fff;\r\n}\r\n\r\n.submitButton {\r\n  margin-top: 20px;\r\n  margin-left: 20px;\r\n  background-color: white; \r\n  color: black; \r\n  border: 2px solid #4CAF50;\r\n  padding: 30px 32px;\r\n  font-size: 16px;\r\n}\r\n\r\n.img-wrap {\r\n  margin-left: 10px;\r\n}\r\n", ""]);
+exports.push([module.i, "body {\r\n  margin: 0;\r\n  background-image: url(http://localhost:3000/fridge.jpg);\r\n  background-size: 136%;\r\n  background-repeat: no-repeat;\r\n  background-color: #050505;\r\n  background-position-y: -194px;\r\n  background-position-x: -240px;\r\n}\r\n\r\n.headlinestyle {\r\n  position: absolute;\r\n    right: 32px;\r\n    top: 50px;\r\n    background-image: url(http://localhost:3000/logo.png);\r\n    background-repeat: no-repeat;\r\n    width: 200px;\r\n    height: 176px;\r\n    background-size: 34%;\r\n}\r\n\r\n.headlineheader {\r\n  cursor: pointer;\r\n  margin-right: auto;\r\n  font-size: 36px;\r\n  font-style: Garamond;\r\n  color: white;\r\n}\r\n\r\n.fridge {\r\n  position: absolute;\r\n  left: 59vw;\r\n  top: 32vh;\r\n}\r\n\r\n@media (min-width: 1600px) {\r\n  .fridge {\r\n    left: 60vw;\r\n  }\r\n}\r\n.inventoryEntry {\r\n  padding: 10px;\r\n  background-color: #2c292c;\r\n  float: left;\r\n  width: 27%;\r\n  margin-right: 13px;\r\n  height: 90px;\r\n  display: flex;\r\n  flex-direction: row;\r\n  margin-bottom: 11px;\r\n  border: 1px solid 484546;\r\n  position: relative;\r\n}\r\n\r\n.productIcon {\r\n  width: 95px;\r\n  height: 95px;\r\n}\r\n\r\n.productInfo {\r\n  display: block;\r\n  position: absolute;\r\n  right: 15px;\r\n  width: 20px;\r\n}\r\n\r\n.amount {\r\n  font-size: 1.7em;\r\n  line-height: 1.8em;\r\n  position: absolute;\r\n  bottom: 0;\r\n  right: 14px;\r\n  color: #fff;\r\n}\r\n\r\n.productName {\r\n  margin: 0;\r\n  font-size: 1em;\r\n  font-weight: normal;\r\n}\r\n\r\n.iconList div {\r\n  border: 1px solid #484546;\r\n  float: left;\r\n  width: 25px;\r\n  height: 25px;\r\n  text-align: center;\r\n  line-height: 25px;\r\n  margin-right: 14px;\r\n  cursor: pointer;\r\n  margin-bottom: 8px;\r\n  color: #fff;\r\n}\r\n\r\n.iconList div:hover {\r\n  background-color: #555;\r\n  color: #fff;\r\n}\r\n\r\n.submitButton {\r\n  background-color: #2c292c; \r\n  color: #fff;\r\n  cursor: pointer; \r\n  border: 1px solid 484546;\r\n  font-size: 16px;\r\n  position: absolute;\r\n  left: 59%;\r\n  width: 340px;\r\n  bottom: 10px;\r\n  height: 40px;\r\n  line-height: 37px;\r\n  padding: 0px;\r\n}\r\n", ""]);
 
 // exports
 
