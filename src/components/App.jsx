@@ -93,9 +93,17 @@ export default class App extends Component {
         {
           Object.keys(this.props.fridgeContent).map((name, idx) => (
             <div className="inventoryEntry" key={idx}>
+              <div className="img-wrap">
+                <img
+                  className="productIcon"
+                  src={`/img/${name}.png`}
+                  alt={name}
+                />
+              </div>
+              <div className="amount" title="amount">
+                {this.props.fridgeContent[name]}
+              </div>
               <div className="productInfo">
-                <h2 className="productName">{name}</h2>
-                <strong>amount:</strong> {this.props.fridgeContent[name]}<br />
                 <div className="iconList">
                   <div
                     id="add-fridge-single-entry"
@@ -110,14 +118,6 @@ export default class App extends Component {
                     -
                   </div>
                 </div>
-              </div>
-              <div className="img-wrap">
-                <img
-                  src={`/img/${name}.png`}
-                  alt={name}
-                  height="50"
-                  width="50"
-                />
               </div>
             </div>
           ))
