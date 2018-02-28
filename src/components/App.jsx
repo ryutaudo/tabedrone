@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
-// import {Well, Panel, FormControl, FormGroup, ControlLabel, Button} from "react-bootstrap"
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 
 /**
- * @todo load init inventore from the database and remove dummy data from the reducer
+ * @todo load init inventory from the database and remove dummy data from the reducer
  */
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
+    this.convertCartToString = this.convertCartToString.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.products = [
       'にく',
@@ -79,11 +79,17 @@ export default class App extends Component {
     );
   }
 
+  convertCartToString() {
+    console.log('cart contents ', JSON.stringify(this.props.cart));
+    const cartObject = this.props.cart;
+    return Object.entries(cartObject).map(([key, value]) => <li>{key} = {value} </li>);
+  }
+
   handleSubmit() {
     confirmAlert({
       title: 'Confirm your order', // Title dialog
-      message: JSON.stringify(this.props.cart), // Message dialog
-      // childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
+      // message: this.convertCartToString(), // Message dialog
+      childrenElement: () => <ul>{this.convertCartToString()}</ul>, // Custom UI or Component
       confirmLabel: 'Confirm Order', // Text button confirm
       cancelLabel: 'Cancel Order', // Text button cancel
       onConfirm: () => alert('Your drone is on the way!'), // Action after Confirm
@@ -139,8 +145,8 @@ export default class App extends Component {
             <div>+</div>
           </div>
         </div>
-      </div>    
-        <button class="submitButton" onClick={this.handleSubmit}>Submit order</button>
+      </div>
+      <button className="submitButton" onClick={this.handleSubmit}>Submit order</button>
     </div>);
   }
 }

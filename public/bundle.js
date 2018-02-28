@@ -21766,6 +21766,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -21791,7 +21793,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 /**
- * @todo load init inventore from the database and remove dummy data from the reducer
+ * @todo load init inventory from the database and remove dummy data from the reducer
  */
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -21803,6 +21805,7 @@ var App = function (_Component) {
 
     _this.addFridgeEntry = _this.addFridgeEntry.bind(_this);
     _this.removeFridgeEntry = _this.removeFridgeEntry.bind(_this);
+    _this.convertCartToString = _this.convertCartToString.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.products = ['にく', 'とりにく', 'なす', 'あじ', 'すし', 'みそらーめん', 'しおらーめん', 'しお'];
     return _this;
@@ -21865,12 +21868,44 @@ var App = function (_Component) {
       });
     }
   }, {
+    key: 'convertCartToString',
+    value: function convertCartToString() {
+      console.log('cart contents ', JSON.stringify(this.props.cart));
+      var cartObject = this.props.cart;
+      // let outputArray = [];
+      // l
+      // outputString = outputString + '\n';
+      // for (Object.entries() in cartObject) {
+      return Object.entries(cartObject).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            value = _ref2[1];
+
+        return _react2.default.createElement(
+          'li',
+          null,
+          key,
+          ' = ',
+          value,
+          ' '
+        );
+      });
+    }
+  }, {
     key: 'handleSubmit',
     value: function handleSubmit() {
+      var _this2 = this;
+
       (0, _reactConfirmAlert.confirmAlert)({
         title: 'Confirm your order', // Title dialog
-        message: JSON.stringify(this.props.cart), // Message dialog
-        // childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
+        // message: this.convertCartToString(), // Message dialog
+        childrenElement: function childrenElement() {
+          return _react2.default.createElement(
+            'ul',
+            null,
+            _this2.convertCartToString()
+          );
+        }, // Custom UI or Component
         confirmLabel: 'Confirm Order', // Text button confirm
         cancelLabel: 'Cancel Order', // Text button cancel
         onConfirm: function onConfirm() {
@@ -21884,7 +21919,7 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
@@ -21908,7 +21943,7 @@ var App = function (_Component) {
                 'amount:'
               ),
               ' ',
-              _this2.props.fridgeContent[name],
+              _this3.props.fridgeContent[name],
               _react2.default.createElement('br', null),
               _react2.default.createElement(
                 'div',
@@ -21918,7 +21953,7 @@ var App = function (_Component) {
                   {
                     id: 'add-fridge-single-entry',
                     onClick: function onClick(event) {
-                      return _this2.addFridgeEntry(event, name);
+                      return _this3.addFridgeEntry(event, name);
                     }
                   },
                   '+'
@@ -21928,7 +21963,7 @@ var App = function (_Component) {
                   {
                     id: 'remove-fridge-single-entry',
                     onClick: function onClick(event) {
-                      return _this2.removeFridgeEntry(event, name);
+                      return _this3.removeFridgeEntry(event, name);
                     }
                   },
                   '-'
@@ -21945,7 +21980,7 @@ var App = function (_Component) {
               'select',
               { id: 'new-product' },
               this.products.filter(function (product) {
-                return !Object.keys(_this2.props.fridgeContent).includes(product);
+                return !Object.keys(_this3.props.fridgeContent).includes(product);
               }).map(function (product, idx) {
                 return _react2.default.createElement(
                   'option',
@@ -21959,7 +21994,7 @@ var App = function (_Component) {
               {
                 className: 'iconList',
                 onClick: function onClick(event) {
-                  return _this2.addFridgeEntry(event);
+                  return _this3.addFridgeEntry(event);
                 }
               },
               _react2.default.createElement(
@@ -21972,7 +22007,7 @@ var App = function (_Component) {
         ),
         _react2.default.createElement(
           'button',
-          { 'class': 'submitButton', onClick: this.handleSubmit },
+          { className: 'submitButton', onClick: this.handleSubmit },
           'Submit order'
         )
       );
@@ -22220,7 +22255,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, ".react-confirm-alert-blur {\r\n  filter: url(#gaussian-blur);\r\n  filter: blur(2px);\r\n  -webkit-filter: blur(2px);\r\n}\r\n\r\n.react-confirm-alert-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 99;\r\n  background: rgba(255, 255, 255, 0.9);\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: center;\r\n  -ms-align-items: center;\r\n  align-items: center;\r\n  opacity: 0;\r\n  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n}\r\n\r\n.react-confirm-alert {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  width: 400px;\r\n  padding: 30px;\r\n  text-align: left;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);\r\n  color: #666;\r\n}\r\n\r\n.react-confirm-alert-svg{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.react-confirm-alert > h1 {\r\n  margin-top: 0;\r\n}\r\n\r\n.react-confirm-alert > h3 {\r\n  margin: 0;\r\n  font-size: 16px;\r\n}\r\n\r\n.react-confirm-alert-button-group {\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  margin-top: 20px;\r\n}\r\n\r\n.react-confirm-alert-button-group > button {\r\n  outline: none;\r\n  background: #333;\r\n  border: none;\r\n  display: inline-block;\r\n  padding: 6px 18px;\r\n  color: #eee;\r\n  margin-right: 10px;\r\n  border-radius: 5px;\r\n  font-size: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@-webkit-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-moz-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-o-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, ".react-confirm-alert-blur {\r\n  filter: url(#gaussian-blur);\r\n  filter: blur(2px);\r\n  -webkit-filter: blur(2px);\r\n}\r\n\r\n.react-confirm-alert-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 99;\r\n  background: rgba(255, 255, 255, 0.9);\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: center;\r\n  -ms-align-items: center;\r\n  align-items: center;\r\n  opacity: 0;\r\n  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n}\r\n\r\n.react-confirm-alert {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  width: 400px;\r\n  padding: 30px;\r\n  text-align: left;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);\r\n  color: #666;\r\n}\r\n\r\n.react-confirm-alert-svg{\r\n \r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.react-confirm-alert > h1 {\r\n  margin-top: 0;\r\n}\r\n\r\n.react-confirm-alert > h3 {\r\n  margin: 0;\r\n  font-size: 16px;\r\n}\r\n\r\n.react-confirm-alert-button-group {\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  margin-top: 20px;\r\n}\r\n\r\n.react-confirm-alert-button-group > button {\r\n  outline: none;\r\n  background: #333;\r\n  border: none;\r\n  display: inline-block;\r\n  padding: 6px 18px;\r\n  color: #eee;\r\n  margin-right: 10px;\r\n  border-radius: 5px;\r\n  font-size: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@-webkit-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-moz-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-o-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
