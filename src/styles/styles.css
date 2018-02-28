@@ -1,12 +1,22 @@
 body {
   margin: 0;
+  background-image: url(http://localhost:3000/fridge.jpg);
+  background-size: 136%;
+  background-repeat: no-repeat;
+  background-color: #050505;
+  background-position-y: -194px;
+  background-position-x: -240px;
 }
 
 .headlinestyle {
-  padding: 2rem;
-  display: flex;
-  justify-content: flex-end;
-  background-color: #1c7e88;
+  position: absolute;
+    right: 32px;
+    top: 50px;
+    background-image: url(http://localhost:3000/logo.png);
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 176px;
+    background-size: 34%;
 }
 
 .headlineheader {
@@ -18,7 +28,9 @@ body {
 }
 
 .fridge {
-  padding: 10px;
+  position: absolute;
+  left: 773px;
+  top: 201px;
 }
 
 .inventoryEntry {
@@ -26,7 +38,7 @@ body {
   border: 1px solid #999;
   background-color: #ccc;
   float: left;
-  width: 30%;
+  width: 37%;
   margin-right: 10px;
   height: 70px;
   display: flex;
@@ -35,6 +47,7 @@ body {
 
 .productInfo {
   display: block;
+  margin-bottom: 10px;
 }
 
 .productName {
