@@ -21891,7 +21891,7 @@ var App = function (_Component) {
       console.log('cart contents ', JSON.stringify(this.props.cart));
       var cartObject = this.props.cart;
 
-      //return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
+      // return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
       return Object.entries(cartObject).map(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
@@ -21928,11 +21928,27 @@ var App = function (_Component) {
         confirmLabel: 'Confirm Order', // Text button confirm
         cancelLabel: 'Cancel Order', // Text button cancel
         onConfirm: function onConfirm() {
-          return alert('Your drone is on the way!');
-        }, // Action after Confirm
-        onCancel: function onCancel() {
-          return alert('Your canceled the order.');
-        } // Action after Cancel
+          (0, _reactConfirmAlert.confirmAlert)({
+            title: 'Order Sent', // Title dialog
+            message: 'We will send drone soon.', // Message dialog
+            childrenElement: function childrenElement() {
+              return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('br', null),
+                'Flight Plan status and coordinates in progress... '
+              );
+            },
+            confirmLabel: 'OK' // Text button confirm
+          });
+          setTimeout(function () {
+            (0, _reactConfirmAlert.confirmAlert)({
+              title: 'Food arrived to customer!', // Title dialog
+              message: 'status: success', // Message dialog
+              confirmLabel: 'OK' // Text button confirm
+            });
+          }, 8000);
+        }
       });
     }
   }, {
@@ -22046,7 +22062,7 @@ var App = function (_Component) {
         ),
         _react2.default.createElement(
           'button',
-          { 'class': 'submitButton', onClick: this.handleSubmit },
+          { className: 'submitButton', onClick: this.handleSubmit },
           'Submit order'
         )
       );
@@ -22294,7 +22310,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, ".react-confirm-alert-blur {\r\n  filter: url(#gaussian-blur);\r\n  filter: blur(2px);\r\n  -webkit-filter: blur(2px);\r\n}\r\n\r\n.react-confirm-alert-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 99;\r\n  background: rgba(255, 255, 255, 0.9);\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: center;\r\n  -ms-align-items: center;\r\n  align-items: center;\r\n  opacity: 0;\r\n  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n}\r\n\r\n.react-confirm-alert {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  width: 400px;\r\n  padding: 30px;\r\n  text-align: left;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);\r\n  color: #666;\r\n}\r\n\r\n.react-confirm-alert-svg{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.react-confirm-alert > h1 {\r\n  margin-top: 0;\r\n}\r\n\r\n.react-confirm-alert > h3 {\r\n  margin: 0;\r\n  font-size: 16px;\r\n}\r\n\r\n.react-confirm-alert-button-group {\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  margin-top: 20px;\r\n}\r\n\r\n.react-confirm-alert-button-group > button {\r\n  outline: none;\r\n  background: #333;\r\n  border: none;\r\n  display: inline-block;\r\n  padding: 6px 18px;\r\n  color: #eee;\r\n  margin-right: 10px;\r\n  border-radius: 5px;\r\n  font-size: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@-webkit-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-moz-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-o-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, ".react-confirm-alert-blur {\r\n  filter: url(#gaussian-blur);\r\n  filter: blur(2px);\r\n  -webkit-filter: blur(2px);\r\n}\r\n\r\n.react-confirm-alert-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 99;\r\n  background: rgba(255, 255, 255, 0.9);\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: center;\r\n  -ms-align-items: center;\r\n  align-items: center;\r\n  opacity: 0;\r\n  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n}\r\n\r\n.react-confirm-alert {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  width: 400px;\r\n  padding: 30px;\r\n  text-align: left;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);\r\n  color: #666;\r\n}\r\n\r\n.react-confirm-alert-svg{\r\n \r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.react-confirm-alert > h1 {\r\n  margin-top: 0;\r\n}\r\n\r\n.react-confirm-alert > h3 {\r\n  margin: 0;\r\n  font-size: 16px;\r\n}\r\n\r\n.react-confirm-alert-button-group {\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  margin-top: 20px;\r\n}\r\n\r\n.react-confirm-alert-button-group > button {\r\n  outline: none;\r\n  background: #333;\r\n  border: none;\r\n  display: inline-block;\r\n  padding: 6px 18px;\r\n  color: #eee;\r\n  margin-right: 10px;\r\n  border-radius: 5px;\r\n  font-size: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@-webkit-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-moz-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-o-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
@@ -22537,7 +22553,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, "body {\r\n  margin: 0;\r\n  background-image: url(http://localhost:3000/fridge.jpg);\r\n  background-size: 136%;\r\n  background-repeat: no-repeat;\r\n  background-color: #050505;\r\n  background-position-y: -194px;\r\n  background-position-x: -240px;\r\n}\r\n\r\n.content {\r\n  float: left;\r\n  width: 100px;\r\n}\r\n\r\n.add-description {\r\n  font-size: 1.1em;\r\n  font-weight: bold;\r\n}\r\n\r\n#new-product {\r\n  width: 100px;\r\n  line-height: 1.5em;\r\n  font-size: 1em;\r\n  margin-top: 15px;\r\n}\r\n\r\n.img-wrap {\r\n  width: 100px;\r\n  float: left;\r\n}\r\n\r\n.headlinestyle {\r\n  position: absolute;\r\n    right: 32px;\r\n    top: 50px;\r\n    background-image: url(http://localhost:3000/logo.png);\r\n    background-repeat: no-repeat;\r\n    width: 200px;\r\n    height: 176px;\r\n    background-size: 34%;\r\n}\r\n\r\n.headlineheader {\r\n  cursor: pointer;\r\n  margin-right: auto;\r\n  font-size: 36px;\r\n  font-style: Garamond;\r\n  color: white;\r\n}\r\n\r\n.fridge {\r\n  position: absolute;\r\n  left: 59vw;\r\n  top: 32vh;\r\n}\r\n\r\n.inventoryEntry {\r\n  color: #fff;\r\n  padding: 10px;\r\n  background-color: #2c292c;\r\n  float: left;\r\n  width: 27%;\r\n  margin-right: 14px;\r\n  height: 90px;\r\n  display: block;\r\n  margin-bottom: 11px;\r\n  border: 1px solid 484546;\r\n  position: relative;\r\n}\r\n\r\n.productIcon {\r\n  width: 95px;\r\n  height: 95px;\r\n}\r\n\r\n.productInfo {\r\n  display: block;\r\n  position: absolute;\r\n  right: 15px;\r\n  width: 20px;\r\n}\r\n\r\n.amount {\r\n  font-size: 1.7em;\r\n  line-height: 1.5em;\r\n  position: absolute;\r\n  bottom: 0;\r\n  right: 14px;\r\n  color: #fff;\r\n}\r\n\r\n.productName {\r\n  margin: 0;\r\n  font-size: 1em;\r\n  font-weight: normal;\r\n}\r\n\r\n.iconList div {\r\n  border: 1px solid #484546;\r\n  float: left;\r\n  width: 25px;\r\n  height: 25px;\r\n  text-align: center;\r\n  line-height: 25px;\r\n  margin-right: 14px;\r\n  cursor: pointer;\r\n  margin-bottom: 8px;\r\n  color: #fff;\r\n}\r\n\r\n.iconList div:hover {\r\n  background-color: #555;\r\n  color: #fff;\r\n}\r\n\r\n.submitButton {\r\n  background-color: #2c292c; \r\n  color: #fff;\r\n  cursor: pointer; \r\n  border: 1px solid 484546;\r\n  font-size: 16px;\r\n  position: absolute;\r\n  left: 59%;\r\n  width: 340px;\r\n  bottom: 10px;\r\n  height: 40px;\r\n  line-height: 37px;\r\n  padding: 0px;\r\n}\r\n\r\n\r\n@media (max-width: 800px) {\r\n  body {\r\n    background-position-y: -69px;\r\n    background-position-x: -118px;\r\n    background-size: 146%;\r\n  }\r\n  .headlinestyle {\r\n    top: 41px;\r\n    left: 432px;\r\n    background-size: 16%;\r\n  }\r\n  .fridge {\r\n    top: 18vh;\r\n    left: 59vw;\r\n  }\r\n}", ""]);
+exports.push([module.i, "body {\n  margin: 0;\n  background-image: url(http://localhost:3000/fridge.jpg);\n  background-size: 136%;\n  background-repeat: no-repeat;\n  background-color: #050505;\n  background-position-y: -194px;\n  background-position-x: -240px;\n}\n\n.content {\n  float: left;\n  width: 100px;\n}\n\n.add-description {\n  font-size: 1.1em;\n  font-weight: bold;\n}\n\n#new-product {\n  width: 100px;\n  line-height: 1.5em;\n  font-size: 1em;\n  margin-top: 15px;\n}\n\n.img-wrap {\n  width: 100px;\n  float: left;\n}\n\n.headlinestyle {\n  position: absolute;\n    right: 32px;\n    top: 50px;\n    background-image: url(http://localhost:3000/logo.png);\n    background-repeat: no-repeat;\n    width: 200px;\n    height: 176px;\n    background-size: 34%;\n}\n\n.headlineheader {\n  cursor: pointer;\n  margin-right: auto;\n  font-size: 36px;\n  font-style: Garamond;\n  color: white;\n}\n\n.fridge {\n  position: absolute;\n  left: 59vw;\n  top: 32vh;\n}\n\n.inventoryEntry {\n  color: #fff;\n  padding: 10px;\n  background-color: #2c292c;\n  float: left;\n  width: 27%;\n  margin-right: 14px;\n  height: 90px;\n  display: block;\n  margin-bottom: 11px;\n  border: 1px solid 484546;\n  position: relative;\n}\n\n.productIcon {\n  width: 95px;\n  height: 95px;\n}\n\n.productInfo {\n  display: block;\n  position: absolute;\n  right: 15px;\n  width: 20px;\n}\n\n.amount {\n  font-size: 1.7em;\n  line-height: 1.5em;\n  position: absolute;\n  bottom: 0;\n  right: 14px;\n  color: #fff;\n}\n\n.productName {\n  margin: 0;\n  font-size: 1em;\n  font-weight: normal;\n}\n\n.iconList div {\n  border: 1px solid #484546;\n  float: left;\n  width: 25px;\n  height: 25px;\n  text-align: center;\n  line-height: 25px;\n  margin-right: 14px;\n  cursor: pointer;\n  margin-bottom: 8px;\n  color: #fff;\n}\n\n.iconList div:hover {\n  background-color: #555;\n  color: #fff;\n}\n\n.submitButton {\n  background-color: #2c292c; \n  color: #fff;\n  cursor: pointer; \n  border: 1px solid 484546;\n  font-size: 16px;\n  position: absolute;\n  left: 59%;\n  width: 340px;\n  bottom: 10px;\n  height: 40px;\n  line-height: 37px;\n  padding: 0px;\n}\n\n\n@media (max-width: 800px) {\n  body {\n    background-position-y: -69px;\n    background-position-x: -118px;\n    background-size: 146%;\n  }\n  .headlinestyle {\n    top: 41px;\n    left: 432px;\n    background-size: 16%;\n  }\n  .fridge {\n    top: 18vh;\n    left: 59vw;\n  }\n}", ""]);
 
 // exports
 
