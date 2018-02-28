@@ -4,13 +4,14 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import Headline from '../container/Headline';
 
 /**
- * @todo load init inventore from the database and remove dummy data from the reducer
+ * @todo load init inventory from the database and remove dummy data from the reducer
  */
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.addFridgeEntry = this.addFridgeEntry.bind(this);
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
+    this.convertCartToString = this.convertCartToString.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -68,15 +69,23 @@ export default class App extends Component {
     );
   }
 
+  convertCartToString() {
+    console.log('cart contents ', JSON.stringify(this.props.cart));
+    const cartObject = this.props.cart;
+
+    //return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
+    return Object.entries(cartObject).map(([key, value]) => <span>{key} : {value} <br /> </span>);
+  }
+
   handleSubmit() {
     confirmAlert({
       title: 'Confirm your order', // Title dialog
-      message: JSON.stringify(this.props.cart), // Message dialog
-      // childrenElement: () => <div>Custom UI</div>,       // Custom UI or Component
-      confirmLabel: 'Confirm', // Text button confirm
-      cancelLabel: 'Cancel', // Text button cancel
-      onConfirm: () => alert('Action after Confirm'), // Action after Confirm
-      onCancel: () => alert('Action after Cancel'), // Action after Cancel
+      message: 'Your order list', // Message dialog
+      childrenElement: () => <div><br />{this.convertCartToString()}</div>, // Custom UI or Component
+      confirmLabel: 'Confirm Order', // Text button confirm
+      cancelLabel: 'Cancel Order', // Text button cancel
+      onConfirm: () => alert('Your drone is on the way!'), // Action after Confirm
+      onCancel: () => alert('Your canceled the order.'), // Action after Cancel
     });
   }
 
@@ -143,7 +152,7 @@ export default class App extends Component {
           </div>
           </div>
         </div>
-      </div>
+      </div>    
         <button class="submitButton" onClick={this.handleSubmit}>Submit order</button>
     </div>);
   }
