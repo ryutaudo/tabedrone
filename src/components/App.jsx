@@ -13,14 +13,14 @@ export default class App extends Component {
     this.removeFridgeEntry = this.removeFridgeEntry.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.products = [
-      'にく',
-      'とりにく',
-      'なす',
-      'あじ',
-      'すし',
-      'みそらーめん',
-      'しおらーめん',
-      'しお',
+      'Beef',
+      'Chicken',
+      'Eggplant',
+      'Salmon',
+      'Rice',
+      'Pasta',
+      'Salt',
+      'Sugar',
     ];
   }
 
