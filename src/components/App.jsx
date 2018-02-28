@@ -87,23 +87,21 @@ export default class App extends Component {
       onConfirm: () => {
         confirmAlert({
           title: 'Order Sent', // Title dialog
-          message: 'We will send drone soon', // Message dialog
+          message: 'We will send drone soon.', // Message dialog
+          childrenElement: () => <div><br />Flight Plan status and coordinates in progress... </div>,
           confirmLabel: 'OK', // Text button confirm
         });
         setTimeout(() => {
           confirmAlert({
-            title: 'Food arrived to customer', // Title dialog
+            title: 'Food arrived to customer!', // Title dialog
+            message: 'status: success', // Message dialog
             confirmLabel: 'OK', // Text button confirm
           });
-        }, 3000);
+        }, 8000);
       },
     });
   }
 
-  // setTimeout(confirmAlert({
-  //   title: 'Order Sent', // Title dialog
-  //   confirmLabel: 'OK', // Text button confirm
-  // }),3000),
   handleChange(event) {
     event.preventDefault();
     const newProduct = event.target.value;
