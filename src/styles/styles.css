@@ -32,7 +32,7 @@ body {
 
 .fridge {
   position: absolute;
-  left: 773px;
+  left: 750px;
   top: 201px;
 }
 
@@ -41,7 +41,7 @@ body {
   border: 1px solid #999;
   background-color: #ccc;
   float: left;
-  width: 37%;
+  width: 33%;
   margin-right: 10px;
   height: 70px;
   margin-bottom: 10px;
