@@ -6,8 +6,7 @@ import '../styles/styles.css';
 
 const Headline = () => (
   <div className="headlinestyle">
-    <header className="headlineheader">
-      Tabedrone Grocery Delivery Service
+    <header className="headlineheader">&nbsp;
     </header>
   </div>
 );
