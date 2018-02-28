@@ -123,18 +123,24 @@ export default class App extends Component {
           ))
         }
         <div className="inventoryEntry" id="add-fridge-entry">
-          Add new product:<br />
+          <div className="content">
+          <div className="add-description">New product</div>
+          <div>
           <input
             type="text"
             id="new-product"
             value={this.props.newProduct}
             onChange={this.handleChange}
           />
+          </div>
+          </div>
+          <div className="productInfo">
           <div
             className="iconList"
             onClick={event => this.addFridgeEntry(event)}
           >
             <div>+</div>
+          </div>
           </div>
         </div>
       </div>
