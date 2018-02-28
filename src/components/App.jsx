@@ -89,8 +89,6 @@ export default class App extends Component {
       onCancel: () => alert('Action after Cancel'), // Action after Cancel
     });
   }
-    
-
 
   render() {
     return (<div>
