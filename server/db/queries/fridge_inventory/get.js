@@ -3,7 +3,6 @@ module.exports = knex =>
    * @param object params
    */
   (params) => {
-    console.log("get method fridge params: ", params);
     // error validation
     if (!params) {
       throw new Error('please add object');

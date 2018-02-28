@@ -7,7 +7,7 @@ module.exports = {
     loaders: [
       {
         loaders: ['style-loader', 'css-loader'],
-        test: /\.css$/,
+        test: /\.(css|png)$/,
       },
       {
         exclude: /node_modules/,
@@ -27,7 +27,8 @@ module.exports = {
     publicPath: '/public',
   },
   plugins: [
-    new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+    new OpenBrowserPlugin({ url: 'http://localhost:3000' }),
+
   ],
   resolve: {
     extensions: ['.webpack.js', '.js', '.jsx'],
@@ -35,9 +36,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     compress: true,
-    port: 8080,
+    port: 3000,
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/api': 'http://localhost:3001',
     },
   },
 };

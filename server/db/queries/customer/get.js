@@ -1,4 +1,4 @@
-module.exports = async knex =>
+module.exports = knex =>
   /**
    * @param object params
    */

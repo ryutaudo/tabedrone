@@ -1,3 +1,4 @@
-module.exports = knex => () =>
-  knex('supermarket')
-    .select();
+module.exports = knex =>
+  () => knex('supermarket')
+    .select()
+    .then(data => data);

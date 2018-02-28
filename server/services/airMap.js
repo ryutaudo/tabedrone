@@ -1,4 +1,5 @@
 const request = require('superagent');
+const dotenv = require('dotenv');
 
 class AirMap {
   /**
@@ -13,6 +14,13 @@ class AirMap {
     this.maxAltitudeAgl = 60.96;
     this.authorization = authorization;
     this.userId = userId;
+  }
+
+  getAccessToken() {
+    return this.getResponse(
+      'https://api.airmap.com/auth/v1/anonymous/token',
+      { user_id: this.authorization },
+    ).then(response => response.data.id_token);
   }
 
   /**
@@ -84,10 +92,14 @@ class AirMap {
    * @return Promise
    */
   getPilotAircraft(pilotId) {
-    return this.getResponse(
-      `${this.baseUrl}/pilot/v2/${pilotId}/aircraft`,
-      {},
-    );
+    return new Response()
+    // return this.getAccessToken()
+    //   .then(token => this.getResponse(
+    //     `${this.baseUrl}/pilot/v2/${pilotId}/aircraft`,
+    //     {},
+    //     `Bearer ${token}`,
+    //   ))
+    //   .catch(error => console.error(error));
   }
 
   /**
@@ -110,13 +122,16 @@ class AirMap {
         }));
   }
 }
-const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkZW50aWFsX2lkIjoiY3JlZGVudGlhbHxhS0JsOXlvVEsycGFKNVNST0p2WkJTejlCbUFvIiwiYXBwbGljYXRpb25faWQiOiJhcHBsaWNhdGlvbnxrNXg4ZW92dG9YTTRkTEhNUHd3QnBVOEFlNmFRIiwib3JnYW5pemF0aW9uX2lkIjoiZGV2ZWxvcGVyfHl6TGxQNE1GbzlscFpFSDhSNVc2SlVFeEtHcHgiLCJpYXQiOjE1MTk1MjI5ODV9.22nFyHA2aSckOkWfMeSX9fOOIRcBksUUxzrTB77enGY';
-const authorization = 'JsERHKUW4nbpoB4WwZZRc50JGkra5qWM';
+const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkZW50aWFsX2lkIjoiY3JlZGVudGlhbHwzMmwyYnFxVGFLbUJkN3NhMlkzNGx0V001RE1BIiwiYXBwbGljYXRpb25faWQiOiJhcHBsaWNhdGlvbnxCWXhLWXFOQ2VZTHhQRVVkT3AyOHBDd1dHbU1QIiwib3JnYW5pemF0aW9uX2lkIjoiZGV2ZWxvcGVyfGVHNzI1WGJmQVo3M1dBSHE0Wko4bENnMEV2eEsiLCJpYXQiOjE1MTk2Mjk1MTB9.rn8p4eiTG_I9J1MPp1xurH6ZKISPEGAfo75OUxIjdMI';
+const authorization = 'Z0G8IYacwAVQriGAkaWN9ZwWNLK8N5cR';
 const userId = '1';
 const airMap = new AirMap(apiKey, authorization, userId);
 
-airMap.getPilotAircraft(1).then(data => console.log(111, data)).catch(data => console.log(222, data));
+airMap.getAccessToken()
+  .then(data => console.log(111, data)).catch(data => console.log(222, data));
 
+airMap.getPilotAircraft(1)
+  .then(data => console.log(111, data)).catch(data => console.log(222, data));
 
 
 /*
@@ -124,7 +139,7 @@ const flightId = 'dummy';
 //airMap.getUser().then(data => console.log(111, data)).catch(data => console.log(222, data));
 */
 // not working
-//airMap.getFlightBriefing(flightId).then(data => console.log(111, data)).catch(data => console.log(222, data));
+airMap.getFlightBriefing(flightId).then(data => console.log(111, data)).catch(data => console.log(222, data));
 
 
 const startGeocode = { latitude: 35.6859307, longitude: 139.7430913 };
