@@ -82,14 +82,16 @@ export default class App extends Component {
   convertCartToString() {
     console.log('cart contents ', JSON.stringify(this.props.cart));
     const cartObject = this.props.cart;
-    return Object.entries(cartObject).map(([key, value]) => <li>{key} = {value} </li>);
+
+    //return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
+    return Object.entries(cartObject).map(([key, value]) => <span>{key} : {value} <br /> </span>);
   }
 
   handleSubmit() {
     confirmAlert({
       title: 'Confirm your order', // Title dialog
-      // message: this.convertCartToString(), // Message dialog
-      childrenElement: () => <ul>{this.convertCartToString()}</ul>, // Custom UI or Component
+      message: 'Your order list', // Message dialog
+      childrenElement: () => <div><br />{this.convertCartToString()}</div>, // Custom UI or Component
       confirmLabel: 'Confirm Order', // Text button confirm
       cancelLabel: 'Cancel Order', // Text button cancel
       onConfirm: () => alert('Your drone is on the way!'), // Action after Confirm
@@ -147,6 +149,6 @@ export default class App extends Component {
         </div>
       </div>
       <button className="submitButton" onClick={this.handleSubmit}>Submit order</button>
-    </div>);
+            </div>);
   }
 }

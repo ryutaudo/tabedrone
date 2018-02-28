@@ -21789,8 +21789,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-// import {Well, Panel, FormControl, FormGroup, ControlLabel, Button} from "react-bootstrap"
-
 
 /**
  * @todo load init inventory from the database and remove dummy data from the reducer
@@ -21872,21 +21870,21 @@ var App = function (_Component) {
     value: function convertCartToString() {
       console.log('cart contents ', JSON.stringify(this.props.cart));
       var cartObject = this.props.cart;
-      // let outputArray = [];
-      // l
-      // outputString = outputString + '\n';
-      // for (Object.entries() in cartObject) {
+
+      //return Object.entries(cartObject).map(([key, value]) => <li>{key} : {value} </li>);
       return Object.entries(cartObject).map(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             key = _ref2[0],
             value = _ref2[1];
 
         return _react2.default.createElement(
-          'li',
+          'span',
           null,
           key,
-          ' = ',
+          ' : ',
           value,
+          ' ',
+          _react2.default.createElement('br', null),
           ' '
         );
       });
@@ -21898,11 +21896,12 @@ var App = function (_Component) {
 
       (0, _reactConfirmAlert.confirmAlert)({
         title: 'Confirm your order', // Title dialog
-        // message: this.convertCartToString(), // Message dialog
+        message: 'Your order list', // Message dialog
         childrenElement: function childrenElement() {
           return _react2.default.createElement(
-            'ul',
+            'div',
             null,
+            _react2.default.createElement('br', null),
             _this2.convertCartToString()
           );
         }, // Custom UI or Component
