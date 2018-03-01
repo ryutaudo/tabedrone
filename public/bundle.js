@@ -21930,7 +21930,7 @@ var App = function (_Component) {
         onConfirm: function onConfirm() {
           (0, _reactConfirmAlert.confirmAlert)({
             title: 'Order Sent', // Title dialog
-            message: 'We will send drone soon.', // Message dialog
+            message: 'We will send a drone soon.', // Message dialog
             childrenElement: function childrenElement() {
               return _react2.default.createElement(
                 'div',
@@ -21939,15 +21939,17 @@ var App = function (_Component) {
                 'Flight Plan status and coordinates in progress... '
               );
             },
-            confirmLabel: 'OK' // Text button confirm
+            confirmLabel: 'OK', // Text button confirm
+            onConfirm: function onConfirm() {
+              setTimeout(function () {
+                (0, _reactConfirmAlert.confirmAlert)({
+                  title: 'Food arrived to customer!', // Title dialog
+                  message: 'status: success', // Message dialog
+                  confirmLabel: 'OK' // Text button confirm
+                });
+              }, 3000);
+            }
           });
-          setTimeout(function () {
-            (0, _reactConfirmAlert.confirmAlert)({
-              title: 'Food arrived to customer!', // Title dialog
-              message: 'status: success', // Message dialog
-              confirmLabel: 'OK' // Text button confirm
-            });
-          }, 8000);
         }
       });
     }
@@ -21979,7 +21981,7 @@ var App = function (_Component) {
                 { className: 'img-wrap' },
                 _react2.default.createElement('img', {
                   className: 'productIcon',
-                  src: '/img/' + name + '.png',
+                  src: name + '.png',
                   alt: name
                 })
               ),
@@ -22310,7 +22312,7 @@ exports = module.exports = __webpack_require__(30)(false);
 
 
 // module
-exports.push([module.i, ".react-confirm-alert-blur {\r\n  filter: url(#gaussian-blur);\r\n  filter: blur(2px);\r\n  -webkit-filter: blur(2px);\r\n}\r\n\r\n.react-confirm-alert-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 99;\r\n  background: rgba(255, 255, 255, 0.9);\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: center;\r\n  -ms-align-items: center;\r\n  align-items: center;\r\n  opacity: 0;\r\n  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n}\r\n\r\n.react-confirm-alert {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  width: 400px;\r\n  padding: 30px;\r\n  text-align: left;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);\r\n  color: #666;\r\n}\r\n\r\n.react-confirm-alert-svg{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.react-confirm-alert > h1 {\r\n  margin-top: 0;\r\n}\r\n\r\n.react-confirm-alert > h3 {\r\n  margin: 0;\r\n  font-size: 16px;\r\n}\r\n\r\n.react-confirm-alert-button-group {\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  margin-top: 20px;\r\n}\r\n\r\n.react-confirm-alert-button-group > button {\r\n  outline: none;\r\n  background: #333;\r\n  border: none;\r\n  display: inline-block;\r\n  padding: 6px 18px;\r\n  color: #eee;\r\n  margin-right: 10px;\r\n  border-radius: 5px;\r\n  font-size: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@-webkit-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-moz-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-o-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, ".react-confirm-alert-blur {\r\n  filter: url(#gaussian-blur);\r\n  filter: blur(2px);\r\n  -webkit-filter: blur(2px);\r\n}\r\n\r\n.react-confirm-alert-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 99;\r\n  background: rgba(255, 255, 255, 0.9);\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: center;\r\n  -ms-align-items: center;\r\n  align-items: center;\r\n  opacity: 0;\r\n  -webkit-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -moz-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  -o-animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n  animation: react-confirm-alert-fadeIn 0.5s 0.2s forwards;\r\n}\r\n\r\n.react-confirm-alert {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  width: 400px;\r\n  padding: 30px;\r\n  text-align: left;\r\n  background: #fff;\r\n  border-radius: 10px;\r\n  box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);\r\n  color: #666;\r\n}\r\n\r\n.react-confirm-alert-svg{\r\n \r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.react-confirm-alert > h1 {\r\n  margin-top: 0;\r\n}\r\n\r\n.react-confirm-alert > h3 {\r\n  margin: 0;\r\n  font-size: 16px;\r\n}\r\n\r\n.react-confirm-alert-button-group {\r\n  display: -webkit-flex;\r\n  display: -moz-flex;\r\n  display: -ms-flex;\r\n  display: -o-flex;\r\n  display: flex;\r\n  justify-content: flex-start;\r\n  margin-top: 20px;\r\n}\r\n\r\n.react-confirm-alert-button-group > button {\r\n  outline: none;\r\n  background: #333;\r\n  border: none;\r\n  display: inline-block;\r\n  padding: 6px 18px;\r\n  color: #eee;\r\n  margin-right: 10px;\r\n  border-radius: 5px;\r\n  font-size: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@-webkit-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-moz-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@-o-keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes react-confirm-alert-fadeIn {\r\n  from {\r\n    opacity: 0;\r\n  }\r\n  to {\r\n    opacity: 1;\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
