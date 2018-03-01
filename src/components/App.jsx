@@ -87,7 +87,7 @@ export default class App extends Component {
       onConfirm: () => {
         confirmAlert({
           title: 'Order Sent', // Title dialog
-          message: 'We will send drone soon.', // Message dialog
+          message: 'We will send a drone soon.', // Message dialog
           childrenElement: () => <div><br />Flight Plan status and coordinates in progress... </div>,
           confirmLabel: 'OK', // Text button confirm
         });
