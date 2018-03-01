@@ -90,14 +90,16 @@ export default class App extends Component {
           message: 'We will send a drone soon.', // Message dialog
           childrenElement: () => <div><br />Flight Plan status and coordinates in progress... </div>,
           confirmLabel: 'OK', // Text button confirm
+          onConfirm: () => {
+            setTimeout(() => {
+              confirmAlert({
+                title: 'Food arrived to customer!', // Title dialog
+                message: 'status: success', // Message dialog
+                confirmLabel: 'OK', // Text button confirm
+              });
+            }, 3000);
+          },
         });
-        setTimeout(() => {
-          confirmAlert({
-            title: 'Food arrived to customer!', // Title dialog
-            message: 'status: success', // Message dialog
-            confirmLabel: 'OK', // Text button confirm
-          });
-        }, 8000);
       },
     });
   }
@@ -148,25 +150,25 @@ export default class App extends Component {
           <div className="content">
             <div className="add-description">New product</div>
             <div>
-            <input
-            type="text"
-            id="new-product"
-            value={this.props.newProduct}
-            onChange={this.handleChange}
-          />
-          </div>
+              <input
+              type="text"
+              id="new-product"
+              value={this.props.newProduct}
+              onChange={this.handleChange}
+            />
+            </div>
           </div>
           <div className="productInfo">
             <div
-            className="iconList"
-            onClick={event => this.addFridgeEntry(event)}
-          >
-            <div>+</div>
-          </div>
+              className="iconList"
+              onClick={event => this.addFridgeEntry(event)}
+            >
+              <div>+</div>
+            </div>
           </div>
         </div>
       </div>
       <button className="submitButton" onClick={this.handleSubmit}>Submit order</button>
-            </div>);
+    </div>);
   }
 }
