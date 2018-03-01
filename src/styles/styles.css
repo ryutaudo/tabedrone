@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-image: url(http://localhost:3000/fridge.jpg);
+  background-image: url(https://tabedrone.herokuapp.com/fridge.jpg);
   background-size: 136%;
   background-repeat: no-repeat;
   background-color: #050505;
@@ -34,7 +34,7 @@ body {
   position: absolute;
     right: 32px;
     top: 50px;
-    background-image: url(http://localhost:3000/logo.png);
+    background-image: url(https://tabedrone.herokuapp.com/logo.png);
     background-repeat: no-repeat;
     width: 200px;
     height: 176px;
